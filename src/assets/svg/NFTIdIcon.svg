@@ -1,0 +1,25 @@
+<svg
+      width="126"
+      height="20"
+      viewBox="0 0 126 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M5 0L0 6H126L121 0H5Z" fill="#1E564C" />
+      <path
+        d="M5 0H121L116.613 13.1623C115.251 17.2457 111.43 20 107.126 20H18.8743C14.57 20 10.7486 17.2457 9.38743 13.1623L7 6L5 0Z"
+
+      />
+      <defs>
+        <linearGradient
+          x1="72.2058"
+          y1="5.99998"
+          x2="14.1811"
+          y2="5.99998"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#5B40FF" />
+          <stop offset="1" stop-color="#00D6AF" />
+        </linearGradient>
+      </defs>
+    </svg>
