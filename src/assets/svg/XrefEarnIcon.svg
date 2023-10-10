@@ -1,0 +1,20 @@
+<svg
+      
+      width='16'
+      height='18'
+      viewBox='0 0 16 18'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+    >
+      <path
+        d='M4 13V5H10.8571V6.14286H12V9.57143H9.71428V10.7143H10.8571V11.8571H12V13H8.57143V11.8571H7.42857V10.7143H6.28571V13H4ZM6.28571 9.57143H8.57143V8.42857H9.71428V6.14286H6.28571V9.57143Z'
+        fill='currentColor'
+      />
+      <path
+        d='M8 1L14.9282 5V13L8 17L1.0718 13V5L8 1Z'
+        stroke='currentColor'
+        stroke-width='2'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      />
+    </svg>

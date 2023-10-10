@@ -1,0 +1,24 @@
+<svg
+      
+      width="18"
+      height="5"
+      viewBox="0 0 18 5"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        r="2"
+        transform="matrix(-1 0 0 1 2 2.68262)"
+        fill="currentColor"
+      />
+      <circle
+        r="2"
+        transform="matrix(-1 0 0 1 8.771 2.68262)"
+        fill="currentColor"
+      />
+      <circle
+        r="2"
+        transform="matrix(-1 0 0 1 15.4377 2.68262)"
+        fill="currentColor"
+      />
+    </svg>
