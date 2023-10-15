@@ -1,0 +1,35 @@
+<svg
+      
+      width="14"
+      height="12"
+      viewBox="0 0 14 12"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx="1.16667" cy="1.16667" r="1.16667" fill="currentColor" />
+      <rect
+        x="3.5"
+        width="10.5"
+        height="2.33333"
+        rx="1.16667"
+        fill="currentColor"
+      />
+      <circle cx="1.16667" cy="5.83268" r="1.16667" fill="currentColor" />
+      <rect
+        x="3.5"
+        y="4.66602"
+        width="10.5"
+        height="2.33333"
+        rx="1.16667"
+        fill="currentColor"
+      />
+      <circle cx="1.16667" cy="10.5007" r="1.16667" fill="currentColor" />
+      <rect
+        x="3.5"
+        y="9.33398"
+        width="10.5"
+        height="2.33333"
+        rx="1.16667"
+        fill="currentColor"
+      />
+    </svg>
