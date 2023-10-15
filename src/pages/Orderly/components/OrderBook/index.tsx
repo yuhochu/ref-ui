@@ -713,6 +713,7 @@ function OrderBook({ maintenance }: { maintenance: boolean }) {
           >
             {!maintenance &&
               asks?.map((order, i) => {
+                console.log("symbolInfosymbolInfo",symbolInfo)
                 return (
                   <OrderLine
                     type="ask"

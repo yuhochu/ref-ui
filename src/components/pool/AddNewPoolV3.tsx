@@ -63,10 +63,12 @@ export const AddNewPoolV3 = (props: any) => {
   const {
     tokenPriceList,
     seed,
+    isOpen,
     ...restProps
   }: {
     seed: Seed;
     tokenPriceList: any;
+    isOpen: boolean;
     restProps: any;
   } = props;
   const { pool: poolDetail, seed_id } = seed;
@@ -615,7 +617,7 @@ export const AddNewPoolV3 = (props: any) => {
     getButtonStatus();
 
   return (
-    <Modal {...restProps}>
+    <Modal isOpen={isOpen} {...restProps}>
       <Card
         style={{ maxHeight: '95vh', width: cardWidth }}
         className="outline-none border border-gradientFrom border-opacity-50 overflow-auto xs:p-4 md:p-4"

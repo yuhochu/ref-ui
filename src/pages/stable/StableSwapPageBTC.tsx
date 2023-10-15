@@ -99,7 +99,6 @@ function StableSwapPageBTC() {
             pool={pool}
             tokens={tokens}
             totalShares={shares}
-            stakeList={stakeList}
             balances={nearBalances}
           />
         );
@@ -112,7 +111,6 @@ function StableSwapPageBTC() {
             shares={shares}
             balances={nearBalances}
             pool={pool}
-            stakeList={stakeList}
           />
         );
     }
@@ -125,8 +123,6 @@ function StableSwapPageBTC() {
       {
         <SharesCard
           shares={shares}
-          userTotalShare={userTotalShare}
-          stakeList={stakeList}
           pool={pool}
         />
       }

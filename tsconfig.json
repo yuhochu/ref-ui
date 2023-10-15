@@ -4,7 +4,7 @@
     "paths": {
       "~*": ["./*"]
     },
-    "noEmit": true,
+    "noEmit": false,
     "target": "es6",
     "lib": ["ES2020", "DOM"],
     "module": "commonjs",

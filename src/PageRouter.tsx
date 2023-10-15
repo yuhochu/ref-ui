@@ -1,6 +1,6 @@
 import { Route, Switch } from 'react-router-dom';
 import React,{lazy} from 'react';
-//import { OrderlyPerpetual } from './pages/Orderly/OrderlyPerpetual';
+import { OrderlyPerpetual } from './pages/Orderly/OrderlyPerpetual';
 import OrderlyTradingBoard from '~pages/Orderly/OrderlyTradingBoard';
 import { AccountPage } from '~pages/AccountPage';
 import { RecentActivityPage } from '~pages/RecentActivityPage';
@@ -29,7 +29,7 @@ import Overview from '~pages/Overview';
 import PortfolioOrderly from '~pages/Orderly/PorfolioOrderly';
 import SwapPage from '~pages/SwapPage';
 
-const OrderlyPerpetual = React.lazy(() => import('./pages/Orderly/OrderlyPerpetual.js'))
+// const OrderlyPerpetual = React.lazy(() => import('./pages/Orderly/OrderlyPerpetual.js'))
 
 // const OrderlyPerpetual = lazy(() => new Promise((resolve, reject) => {
 //   import('./pages/Orderly/OrderlyPerpetual.js')

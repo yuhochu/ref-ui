@@ -216,19 +216,19 @@ export interface SymbolInfo {
   base_tick: number;
   min_notional: number;
   price_range: number;
-  price_scope: number;
-  std_liquidation_fee: number;
-  liquidator_fee: number;
-  claim_insurance_fund_discount: number;
-  funding_period: number;
-  cap_funding: number;
-  floor_funding: number;
-  interest_rate: number;
-  created_time: number;
-  updated_time: number;
-  imr_factor: number;
-  base_mmr: number;
-  base_imr: number;
+  price_scope?: number;
+  std_liquidation_fee?: number;
+  liquidator_fee?: number;
+  claim_insurance_fund_discount?: number;
+  funding_period?: number;
+  cap_funding?: number;
+  floor_funding?: number;
+  interest_rate?: number;
+  created_time?: number;
+  updated_time?: number;
+  imr_factor?: number;
+  base_mmr?: number;
+  base_imr?: number;
 }
 
 export interface OrderlyBalance {

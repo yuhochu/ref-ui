@@ -1,58 +1,61 @@
-import { path } from 'animejs';
-import React, { useEffect, useMemo, useState, useContext } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { useHistory } from 'react-router-dom';
-import { Card } from '~components/card/Card';
-import { isMobile } from '~utils/device';
-import { ModalClose } from '~components/icon';
-import { BoxDarkBg, SideIcon } from '~components/icon/V3';
+import { path } from "animejs";
+import React, { useEffect, useMemo, useState, useContext } from "react";
+import { FormattedMessage } from "react-intl";
+import { useHistory } from "react-router-dom";
+import { Card } from "~components/card/Card";
+import { isMobile } from "~utils/device";
+import { ModalClose } from "~components/icon";
+import { BoxDarkBg, SideIcon } from "~components/icon/V3";
 import {
   GradientButton,
   ButtonTextWrapper,
-  ConnectToNearBtn,
-} from '../../components/button/Button';
+  ConnectToNearBtn
+} from "../../components/button/Button";
 
-import { WalletContext } from '~utils/wallets-integration';
-import { PoolSlippageSelectorV3 } from '~components/forms/SlippageSelector';
-import Modal from 'react-modal';
-import BigNumber from 'bignumber.js';
+import { WalletContext } from "~utils/wallets-integration";
+import { PoolSlippageSelectorV3 } from "~components/forms/SlippageSelector";
+import Modal from "react-modal";
+import BigNumber from "bignumber.js";
 import {
   formatWithCommas,
   toPrecision,
   toReadableNumber,
-  toNonDivisibleNumber,
-} from '~utils/numbers';
+  toNonDivisibleNumber
+} from "~utils/numbers";
 import {
   CONSTANT_D,
   UserLiquidityInfo,
-  sort_tokens_by_base,
-} from '../../services/commonV3';
+  sort_tokens_by_base
+} from "../../services/commonV3";
 import {
   PoolInfo,
   add_liquidity,
-  append_liquidity,
-} from '../../services/swapV3';
-import { toRealSymbol } from '../../utils/token';
-import { WRAP_NEAR_CONTRACT_ID } from '../../services/wrap-near';
-import { TokenMetadata, ftGetBalance } from '../../services/ft-contract';
-import { useDepositableBalance } from '../../state/token';
-import _ from 'lodash';
+  append_liquidity
+} from "../../services/swapV3";
+import { toRealSymbol } from "../../utils/token";
+import { WRAP_NEAR_CONTRACT_ID } from "../../services/wrap-near";
+import { TokenMetadata, ftGetBalance } from "../../services/ft-contract";
+import { useDepositableBalance } from "../../state/token";
+import _ from "lodash";
+
 export const AddPoolV3 = (props: any) => {
   const {
     tokenMetadata_x_y,
     poolDetail,
     userLiquidity,
     tokenPriceList,
+    isOpen,
     ...restProps
   }: {
     tokenMetadata_x_y: TokenMetadata[];
     poolDetail: PoolInfo;
     userLiquidity: UserLiquidityInfo;
     tokenPriceList: any;
+    isOpen: boolean;
     restProps: any;
   } = props;
-  const [tokenXAmount, setTokenXAmount] = useState('');
-  const [tokenYAmount, setTokenYAmount] = useState('');
+  const [tokenXAmount, setTokenXAmount] = useState("");
+  const [tokenYAmount, setTokenYAmount] = useState("");
   const [tokenXBalanceFromNear, setTokenXBalanceFromNear] = useState<string>();
   const [tokenYBalanceFromNear, setTokenYBalanceFromNear] = useState<string>();
   const [addLoading, setAddLoading] = useState<boolean>(false);
@@ -60,8 +63,8 @@ export const AddPoolV3 = (props: any) => {
   const [onlyAddXToken, setOnlyAddXToken] = useState(false);
   const { globalState } = useContext(WalletContext);
   const isSignedIn = globalState.isSignedIn;
-  const nearBalance = useDepositableBalance('NEAR');
-  const cardWidth = isMobile() ? '90vw' : '30vw';
+  const nearBalance = useDepositableBalance("NEAR");
+  const cardWidth = isMobile() ? "90vw" : "30vw";
   useEffect(() => {
     if (userLiquidity && poolDetail) {
       const { current_point } = poolDetail;
@@ -100,12 +103,13 @@ export const AddPoolV3 = (props: any) => {
       );
     }
   }, [tokenMetadata_x_y, isSignedIn, nearBalance]);
+
   function getTokenYAmountByCondition({
-    amount,
-    leftPoint,
-    rightPoint,
-    currentPoint,
-  }: {
+                                        amount,
+                                        leftPoint,
+                                        rightPoint,
+                                        currentPoint
+                                      }: {
     amount: string;
     leftPoint: number;
     rightPoint: number;
@@ -113,13 +117,13 @@ export const AddPoolV3 = (props: any) => {
   }) {
     const [tokenX, tokenY] = tokenMetadata_x_y;
     if (+amount == 0) {
-      setTokenYAmount('');
+      setTokenYAmount("");
     } else {
       // X-->L
       const L =
         +amount *
         ((Math.pow(Math.sqrt(CONSTANT_D), rightPoint) -
-          Math.pow(Math.sqrt(CONSTANT_D), rightPoint - 1)) /
+            Math.pow(Math.sqrt(CONSTANT_D), rightPoint - 1)) /
           (Math.pow(Math.sqrt(CONSTANT_D), rightPoint - currentPoint - 1) - 1));
       // L-->current Y
       const Yc = L * Math.pow(Math.sqrt(CONSTANT_D), currentPoint);
@@ -127,7 +131,7 @@ export const AddPoolV3 = (props: any) => {
       const Y =
         L *
         ((Math.pow(Math.sqrt(CONSTANT_D), currentPoint) -
-          Math.pow(Math.sqrt(CONSTANT_D), leftPoint)) /
+            Math.pow(Math.sqrt(CONSTANT_D), leftPoint)) /
           (Math.sqrt(CONSTANT_D) - 1));
       const decimalsRate =
         Math.pow(10, tokenX.decimals) / Math.pow(10, tokenY.decimals);
@@ -137,12 +141,13 @@ export const AddPoolV3 = (props: any) => {
       setTokenYAmount(Y_result.toString());
     }
   }
+
   function getTokenXAmountByCondition({
-    amount,
-    leftPoint,
-    rightPoint,
-    currentPoint,
-  }: {
+                                        amount,
+                                        leftPoint,
+                                        rightPoint,
+                                        currentPoint
+                                      }: {
     amount: string;
     leftPoint: number;
     rightPoint: number;
@@ -150,7 +155,7 @@ export const AddPoolV3 = (props: any) => {
   }) {
     const [tokenX, tokenY] = tokenMetadata_x_y;
     if (+amount == 0) {
-      setTokenXAmount('');
+      setTokenXAmount("");
     } else {
       let L;
       // Yc-->L
@@ -175,6 +180,7 @@ export const AddPoolV3 = (props: any) => {
       setTokenXAmount(X_result.toString());
     }
   }
+
   function append() {
     setAddLoading(true);
     const [tokenX, tokenY] = tokenMetadata_x_y;
@@ -182,12 +188,13 @@ export const AddPoolV3 = (props: any) => {
     append_liquidity({
       lpt_id,
       mft_id,
-      amount_x: toNonDivisibleNumber(tokenX.decimals, tokenXAmount || '0'),
-      amount_y: toNonDivisibleNumber(tokenY.decimals, tokenYAmount || '0'),
+      amount_x: toNonDivisibleNumber(tokenX.decimals, tokenXAmount || "0"),
+      amount_y: toNonDivisibleNumber(tokenY.decimals, tokenYAmount || "0"),
       token_x: tokenX,
-      token_y: tokenY,
+      token_y: tokenY
     });
   }
+
   function changeTokenXAmount(amount: string) {
     const { current_point } = poolDetail;
     const { left_point, right_point } = userLiquidity;
@@ -197,10 +204,11 @@ export const AddPoolV3 = (props: any) => {
         amount,
         leftPoint: left_point,
         rightPoint: right_point,
-        currentPoint: current_point,
+        currentPoint: current_point
       });
     }
   }
+
   function changeTokenYAmount(amount: string) {
     const { current_point } = poolDetail;
     const { left_point, right_point } = userLiquidity;
@@ -210,10 +218,11 @@ export const AddPoolV3 = (props: any) => {
         amount,
         leftPoint: left_point,
         rightPoint: right_point,
-        currentPoint: current_point,
+        currentPoint: current_point
       });
     }
   }
+
   function getButtonStatus() {
     if (!tokenMetadata_x_y) return {};
     const [tokenX, tokenY] = tokenMetadata_x_y;
@@ -257,23 +266,25 @@ export const AddPoolV3 = (props: any) => {
     }
     return {
       status: !condition,
-      not_enough_token,
+      not_enough_token
     };
   }
+
   function getMax(token: TokenMetadata, balance: string) {
     return token.id !== WRAP_NEAR_CONTRACT_ID
       ? balance
       : Number(balance) <= 0.5
-      ? '0'
-      : String(Number(balance) - 0.5);
+        ? "0"
+        : String(Number(balance) - 0.5);
   }
+
   const { status: isAddLiquidityDisabled, not_enough_token } =
     getButtonStatus();
   const tokens = sort_tokens_by_base(tokenMetadata_x_y);
   return (
-    <Modal {...restProps}>
+    <Modal isOpen={isOpen} {...restProps}>
       <Card
-        style={{ maxHeight: '95vh' }}
+        style={{ maxHeight: "95vh" }}
         className="outline-none border border-gradientFrom border-opacity-50 overflow-auto xs:p-4 md:p-4 xs:w-90vw md:w-90vw lg:w-40vw xl:w-30vw"
       >
         <div className="flex items-center justify-between">
@@ -339,7 +350,7 @@ export const AddPoolV3 = (props: any) => {
                       <FormattedMessage id="near_validation_error" />
                     ) : (
                       <>
-                        <FormattedMessage id="you_do_not_have_enough" />{' '}
+                        <FormattedMessage id="you_do_not_have_enough" />{" "}
                         {not_enough_token.symbol}
                       </>
                     )}
@@ -354,7 +365,7 @@ export const AddPoolV3 = (props: any) => {
                   disabled={addLoading || isAddLiquidityDisabled}
                   loading={addLoading || isAddLiquidityDisabled}
                   btnClassName={`${
-                    isAddLiquidityDisabled ? 'cursor-not-allowed' : ''
+                    isAddLiquidityDisabled ? "cursor-not-allowed" : ""
                   }`}
                   className={`mt-8 w-full h-14 text-center text-lg text-white focus:outline-none font-semibold`}
                   backgroundImage="linear-gradient(270deg, #7F43FF 0%, #00C6A2 97.06%)"
@@ -378,13 +389,13 @@ export const AddPoolV3 = (props: any) => {
 };
 
 function InputAmount({
-  token,
-  balance,
-  tokenPriceList,
-  changeAmount,
-  amount,
-  hidden,
-}: {
+                       token,
+                       balance,
+                       tokenPriceList,
+                       changeAmount,
+                       amount,
+                       hidden
+                     }: {
   token: TokenMetadata;
   balance: string;
   tokenPriceList: Record<string, any>;
@@ -392,42 +403,45 @@ function InputAmount({
   amount: string;
   hidden: Boolean;
 }) {
-  const [inputPrice, setInputPrice] = useState('');
+  const [inputPrice, setInputPrice] = useState("");
   useEffect(() => {
     if (tokenPriceList && amount) {
-      const price = tokenPriceList[token.id]?.price || '';
+      const price = tokenPriceList[token.id]?.price || "";
       if (price) {
         setInputPrice(new BigNumber(price).multipliedBy(amount).toFixed());
       } else {
-        setInputPrice('');
+        setInputPrice("");
       }
     } else {
-      setInputPrice('');
+      setInputPrice("");
     }
   }, [amount, tokenPriceList?.length]);
+
   function getBalance() {
-    let r = '0';
+    let r = "0";
     if (token && balance) {
       r = formatWithCommas(toPrecision(balance.toString(), 3));
     }
     return r;
   }
+
   function showCurrentPrice() {
     if (inputPrice) {
-      return '$' + formatWithCommas(toPrecision(inputPrice.toString(), 3));
+      return "$" + formatWithCommas(toPrecision(inputPrice.toString(), 3));
     }
-    return '$-';
+    return "$-";
   }
+
   const maxBalance =
     token?.id !== WRAP_NEAR_CONTRACT_ID
       ? balance
       : Number(balance) <= 0.5
-      ? '0'
-      : String(Number(balance) - 0.5);
+        ? "0"
+        : String(Number(balance) - 0.5);
   return (
     <div
       className={`bg-black bg-opacity-20 rounded-xl p-3 mt-3 ${
-        hidden ? 'hidden' : ''
+        hidden ? "hidden" : ""
       }`}
     >
       <div className="flex items-center justify-between">
@@ -449,13 +463,13 @@ function InputAmount({
       </div>
       <div
         className={`flex items-center justify-between mt-2.5 ${
-          token ? 'visible' : 'invisible'
+          token ? "visible" : "invisible"
         }`}
       >
         <span className="text-xs text-primaryText">{showCurrentPrice()}</span>
         <div className="flex items-center text-xs text-primaryText ml-1.5">
           <span title={balance}>
-            <FormattedMessage id="balance" />:{' '}
+            <FormattedMessage id="balance" />:{" "}
             <span
               className="hover:text-white cursor-pointer underline"
               onClick={() => {
@@ -475,9 +489,9 @@ function OneSide({ show }: { show: boolean }) {
   return (
     <div
       className={`items-center relative rounded-xl bg-black bg-opacity-20 py-2.5 px-6 mt-3 ${
-        show ? 'flex' : 'hidden'
+        show ? "flex" : "hidden"
       }`}
-      style={{ minHeight: '5rem' }}
+      style={{ minHeight: "5rem" }}
     >
       <BoxDarkBg className="absolute top-0 right-0"></BoxDarkBg>
       <SideIcon className="mr-5 flex-shrink-0"></SideIcon>

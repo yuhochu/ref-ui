@@ -40,6 +40,7 @@ export const RemovePoolV3 = (props: any) => {
     userLiquidity,
     tokenPriceList,
     isLegacy,
+    isOpen,
     ...restProps
   }: {
     tokenMetadata_x_y: TokenMetadata[];
@@ -47,6 +48,7 @@ export const RemovePoolV3 = (props: any) => {
     userLiquidity: UserLiquidityInfo;
     tokenPriceList: any;
     isLegacy?: boolean;
+    isOpen:boolean;
     restProps: any;
   } = props;
   const [slippageTolerance, setSlippageTolerance] = useState<number>(0.5);
@@ -354,7 +356,7 @@ export const RemovePoolV3 = (props: any) => {
   );
   const tokens = sort_tokens_by_base(tokenMetadata_x_y);
   return (
-    <Modal {...restProps}>
+    <Modal isOpen={isOpen} {...restProps}>
       <Card
         style={{ maxHeight: '95vh' }}
         className={`outline-none border border-gradientFrom border-opacity-50 overflow-auto xsm: p-5 xs:w-90vw md:w-90vw lg:w-40vw xl:w-30vw`}
