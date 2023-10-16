@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT OR Apache-2.0",
   "scripts": {
-    "build": "parcel build src/index.html",
+    "build": "parcel build src/index.html --detailed-report",
     "build:testnet": "NEAR_ENV=testnet parcel build src/index.html",
     "build:pub-testnet": "NEAR_ENV=pub-testnet parcel build src/index.html",
     "build:mainnet": "NEAR_ENV=mainnet parcel build src/index.html",
@@ -133,7 +133,6 @@
     "react-countdown": "^2.3.2",
     "react-datepicker": "^4.8.0",
     "react-dom": "^16.9.0 || ^17",
-    "react-icons": "^4.7.1",
     "react-infinite-scroll-component": "^6.1.0",
     "react-intersection-observer": "^8.33.1",
     "react-intl": "^5.20.10",
