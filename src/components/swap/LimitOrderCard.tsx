@@ -968,6 +968,7 @@ export default function LimitOrderCard(props: {
         }}
         isInsufficient={isInsufficientBalance}
       >
+        line971
         <TokenAmountV3
           forSwap
           swapMode={swapMode}
@@ -1054,6 +1055,7 @@ export default function LimitOrderCard(props: {
             },
           }}
         >
+          line1058
           <TokenAmountV3
             forSwap
             isOut

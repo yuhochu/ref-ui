@@ -383,6 +383,7 @@ export const StableSelectToken = ({
   );
 };
 export const localTokens = createContext(null);
+
 export default function SelectToken({
   tokens,
   selected,
@@ -447,6 +448,9 @@ export default function SelectToken({
     balances,
     visible
   );
+  // console.log("sekectt",tokens)
+  // console.log("line451",tokensData)
+  // console.log("listData",listData)
   useEffect(() => {
     if (!loadingTokensData) {
       const sortedData = [...tokensData].sort(sortTypes[currentSort].fn);
@@ -462,6 +466,7 @@ export default function SelectToken({
       setListData(sortedData);
     }
   }, [currentSort, sortBy]);
+
   useEffect(() => {
     getLatestCommonBassesTokens();
   }, [tokensData]);
@@ -704,6 +709,8 @@ export default function SelectToken({
                   handleClose={handleClose}
                 />
               )}
+
+              line708
               <Table
                 sortBy={sortBy}
                 tokenPriceList={tokenPriceList}
@@ -795,6 +802,7 @@ export function SelectTokenDCL({
 
   const handleSelect = (p: PoolInfo) => {
     // select token in
+    console.log("selectin",p)
     const { token_x_metadata, token_y_metadata } = p;
     const tokens = sort_tokens_by_base([token_x_metadata, token_y_metadata]);
 

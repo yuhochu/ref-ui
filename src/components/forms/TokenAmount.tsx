@@ -430,6 +430,7 @@ export default function TokenAmount({
               : null
           }
         />
+        line433
         {showSelectToken &&
           (!swapMode || swapMode === SWAP_MODE.NORMAL ? (
             <SelectToken
@@ -712,6 +713,7 @@ export function TokenAmountV3({
       ) : null}
 
       <fieldset className="relative flex  align-center items-center my-1.5">
+        line716
         <InputAmountV3
           className="border border-transparent rounded w-full mr-2"
           id="inputAmount"
@@ -749,6 +751,8 @@ export function TokenAmountV3({
             ) : null
           }
         />
+
+        line754
         {swapMode === SWAP_MODE.LIMIT ? (
           <SelectTokenDCL
             onSelect={onSelectToken}
@@ -869,6 +873,8 @@ export function TokenCardIn({
       }}
     >
       <div className="flex items-center justify-between">
+
+        SelectTokenTokenCardIn
         <SelectToken
           tokenPriceList={tokenPriceList}
           tokens={tokens}

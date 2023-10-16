@@ -335,6 +335,7 @@ function SwapPage() {
       }}
     >
       <div className="frsc xsm:flex   xsm:flex-col-reverse">
+        line 338
         {swapType === SWAP_TYPE.Pro && (
           <div
             className="lg:w-full  mr-8 xsm:w-95vw xsm:mx-auto "
@@ -395,8 +396,10 @@ function SwapPage() {
           </div>
         )}
 
+        line 398
         <div className="swapContainer xsm:w-95vw xsm:mx-auto">
           <section className={`lg:w-480px  relative`}>
+            line 402
             {swapMode === SWAP_MODE.NORMAL && (
               <SwapCard
                 allTokens={crossSwapTokens}

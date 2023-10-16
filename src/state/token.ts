@@ -363,6 +363,7 @@ export const useTokensData = (
   const [result, setResult] = useState<TokenMetadata[]>([]);
   const fetchIdRef = useRef(0);
   const setResultAtIndex = (data: TokenMetadata, index: number) => {
+    console.log("setResultAtIndexsetResultAtIndex")
     setResult((oldResults) => {
       const newResults = [...oldResults];
       newResults[index] = data;
@@ -374,6 +375,7 @@ export const useTokensData = (
   const { accountId } = useWalletSelector();
 
   const trigger = useCallback(() => {
+    console.log("triggertrigger",trigger)
     setCount(0);
     setResult([]);
     const currentFetchId = fetchIdRef.current;

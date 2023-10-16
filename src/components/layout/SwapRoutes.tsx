@@ -1883,6 +1883,7 @@ export const TradeRouteModal = (
     trade: ExchangeEstimate;
   }
 ) => {
+  console.log("propsprops",props)
   return (
     <ModalWrapper
       title={

@@ -489,17 +489,16 @@ export function NavLogoLarge() {
   );
 }
 
-export function OrderlyIcon(props: any) {
+export function OrderlyIcon({activeMenu}) {
   return (
     <svg
-      {...props}
       width="19"
       height="19"
       viewBox="0 0 19 19"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g opacity={props.activeMenu ? 1 : 0.5}>
+      <g opacity={activeMenu ? 1 : 0.5}>
         <circle cx="9.23804" cy="9.23804" r="9.23804" fill="#4627FF" />
         <path
           fillRule="evenodd"

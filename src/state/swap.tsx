@@ -422,6 +422,7 @@ export const estimateValidator = (
   }
   return true;
 };
+
 export const useSwap = ({
   tokenIn,
   tokenInAmount,
@@ -2035,7 +2036,9 @@ export const useRefSwapPro = ({
         ['tri']: resAurora,
         ['orderly']: resOrderly,
       };
-
+console.log("resRefresRef",resRef)
+      console.log("resRefresRefresAurora",resAurora)
+      console.log("resOrderlyresOrderly",resOrderly)
       const tradeList = [resRef, resAurora];
 
       //  reValidate trades
