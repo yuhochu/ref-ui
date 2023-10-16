@@ -12,7 +12,6 @@ import type { WalletSelectorModal } from './modal-ui';
 import { setupNearWallet } from '@near-wallet-selector/near-wallet';
 import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet';
 import { setupSender } from '@near-wallet-selector/sender';
-import { setupMathWallet } from '@near-wallet-selector/math-wallet';
 import { setupLedger } from '@near-wallet-selector/ledger';
 
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
@@ -44,8 +43,6 @@ import {
   get_orderly_public_key_path,
 } from '../pages/Orderly/orderly/utils';
 import { isMobile } from '../utils/device';
-import { AccountView } from 'near-api-js/lib/providers/provider';
-import { Account, providers } from 'near-api-js';
 
 const CONTRACT_ID = getOrderlyConfig().ORDERLY_ASSET_MANAGER;
 

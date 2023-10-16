@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { isMobile } from '~utils/device';
-import CloseButtonSvg from "../../assets/svg/CloseButton.svg"
+import CloseButtonSvg from '../../assets/svg/CloseButton.svg';
 import StepTwoSvg from '../../assets/svg/StepTwo.svg';
 import StepOneSvg from '../../assets/svg/StepOne.svg';
 import StepThreeSvg from '../../assets/svg/StepThree.svg';
@@ -131,15 +131,31 @@ export default function Guider() {
 }
 
 const StepOne = (props: any) => {
-  return <span {...props}><StepOneSvg /></span>;
+  return (
+    <span {...props}>
+      <StepOneSvg />
+    </span>
+  );
 };
 const StepTwo = (props: any) => {
-  return <span {...props}><StepTwoSvg /></span>;
+  return (
+    <span {...props}>
+      <StepTwoSvg />
+    </span>
+  );
 };
 const StepThree = (props: any) => {
-  return <span {...props}><StepThreeSvg /></span>;
+  return (
+    <span {...props}>
+      <StepThreeSvg />
+    </span>
+  );
 };
 
 const CloseButton = (props: any) => {
-  return <span {...props}><CloseButtonSvg /></span>;
+  return (
+    <span {...props}>
+      <CloseButtonSvg />
+    </span>
+  );
 };

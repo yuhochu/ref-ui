@@ -45,10 +45,8 @@ import {
   scientificNotationToString,
 } from '../../utils/numbers';
 import Big from 'big.js';
-import { useTokenPriceList } from '../../state/token';
 import { PopUpContainer, PopUpContainerMulti } from '../icon/Info';
 import { percentLess, multiply, divide } from '../../utils/numbers';
-import { QuestionTip } from './TipWrapper';
 import { HiOutlineExternalLink } from '../reactIcons';
 import { Images } from '../stableswap/CommonComp';
 import { getAuroraConfig } from '../../services/aurora/config';
@@ -67,12 +65,12 @@ import {
 } from '../../pages/SwapPage';
 import { DisplayIcon } from '../../components/tokens/Icon';
 import Modal from 'react-modal';
-import { ModalWrapper } from '../../pages/ReferendumPage';
 import { displayNumberToAppropriateDecimals } from '../../services/commonV3';
 import { numberWithCommas } from '../../pages/Orderly/utiles';
 import { get_pool_name, openUrl } from '../../services/commonV3';
 import { REF_FI_BEST_MARKET_ROUTE } from '../../state/swap';
 import { PolygonRight } from '../../pages/Orderly/components/Common/Icons';
+import { ModalWrapper } from '~components/modalWrapper/ModalWrapper';
 
 export const GetPriceImpact = (
   value: string,

@@ -30,7 +30,6 @@ import {
   removeSenderLoginRes,
 } from './utils/wallets-integration';
 
-
 import { useGlobalPopUp } from './state/popUp';
 import { providers } from 'near-api-js';
 import {
@@ -191,7 +190,7 @@ export function Content() {
         }}
       />
       <OrderlyContextProvider>
-        <PageRouter/>
+        <PageRouter />
       </OrderlyContextProvider>
     </WalletContext.Provider>
   );

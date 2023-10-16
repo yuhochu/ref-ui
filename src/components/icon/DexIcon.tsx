@@ -11,10 +11,10 @@ export const TriIconLarge = () => {
   return <TriIconLargeSvg />;
 };
 export const NEARICONDEX = () => {
-  return <NEARICONDEXSvg className='absolute -bottom-1 -right-1 ' />;
+  return <NEARICONDEXSvg className="absolute -bottom-1 -right-1 " />;
 };
 export const AURORAICONDEX = () => {
-  return <AURORAICONDEXSvg className='absolute -bottom-1 -right-1 ' />;
+  return <AURORAICONDEXSvg className="absolute -bottom-1 -right-1 " />;
 };
 
 export const TriIconLight = ({ hiddenBg }: { hiddenBg?: boolean }) => {

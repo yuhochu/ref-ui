@@ -28,73 +28,161 @@ import OverviewMenuIconSvg from '../../assets/svg/OverviewMenuIcon.svg';
 import TokenIconSvg from '../../assets/svg/TokenIcon.svg';
 
 export const MenuREFIcon = (props: any) => {
-  return <span {...props}><MenuREFIconSvg /></span>;
+  return (
+    <span {...props}>
+      <MenuREFIconSvg />
+    </span>
+  );
 };
 export const MenuBurrowIcon = (props: any) => {
-  return <span {...props}><MenuBurrowIconSvg /></span>;
+  return (
+    <span {...props}>
+      <MenuBurrowIconSvg />
+    </span>
+  );
 };
 export const REFIcon = (props: any) => {
-  return <span {...props}><PortfolioREFIconSvg /></span>;
+  return (
+    <span {...props}>
+      <PortfolioREFIconSvg />
+    </span>
+  );
 };
 export const TriangleIcon = (props: any) => {
-  return <span {...props}><TriangleIconSvg /></span>;
+  return (
+    <span {...props}>
+      <TriangleIconSvg />
+    </span>
+  );
 };
 export const LinkIcon = (props: any) => {
-  return <span {...props}><PortfolioLinkIconSvg /></span>;
+  return (
+    <span {...props}>
+      <PortfolioLinkIconSvg />
+    </span>
+  );
 };
 export const WaterDropIcon = (props: any) => {
-  return <span {...props}><WaterDropIconSvg /></span>;
+  return (
+    <span {...props}>
+      <WaterDropIconSvg />
+    </span>
+  );
 };
 export const FarmMiningIcon = (props: any) => {
-  return <span {...props}><FarmMiningIconSvg /></span>;
+  return (
+    <span {...props}>
+      <FarmMiningIconSvg />
+    </span>
+  );
 };
 export const PurpleCircleIcon = (props: any) => {
-  return <span {...props}><PortfolioPurpleCircleIconSvg /></span>;
+  return (
+    <span {...props}>
+      <PortfolioPurpleCircleIconSvg />
+    </span>
+  );
 };
 export const ArrowRIcon = (props: any) => {
-  return <span {...props}><ArrowRIconSvg /></span>;
+  return (
+    <span {...props}>
+      <ArrowRIconSvg />
+    </span>
+  );
 };
 export const AuroraIcon = (props: any) => {
-  return <span {...props}><AuroraIconSvg /></span>;
+  return (
+    <span {...props}>
+      <AuroraIconSvg />
+    </span>
+  );
 };
 export const AuroraIconActive = (props: any) => {
-  return <span {...props}><AuroraIconActiveSvg /></span>;
+  return (
+    <span {...props}>
+      <AuroraIconActiveSvg />
+    </span>
+  );
 };
 export const TriangleGreyIcon = (props: any) => {
-  return <span {...props}><TriangleGreyIconSvg /></span>;
+  return (
+    <span {...props}>
+      <TriangleGreyIconSvg />
+    </span>
+  );
 };
 export const CopyIcon = (props: any) => {
-  return <span {...props}><CopyIconSvg /></span>;
+  return (
+    <span {...props}>
+      <CopyIconSvg />
+    </span>
+  );
 };
 export const OverviewIcon = (props: any) => {
-  return <span {...props}><PortfolioOverviewIconSvg /></span>;
+  return (
+    <span {...props}>
+      <PortfolioOverviewIconSvg />
+    </span>
+  );
 };
 export const PositionsIcon = (props: any) => {
-  return <span {...props}><PositionsIconSvg /></span>;
+  return (
+    <span {...props}>
+      <PositionsIconSvg />
+    </span>
+  );
 };
 export const TokenIcon = (props: any) => {
-  return <span {...props}><TokenIconSvg /></span>;
+  return (
+    <span {...props}>
+      <TokenIconSvg />
+    </span>
+  );
 };
 export const ArrowRightForOrder = (props: any) => {
-  return <span {...props}><ArrowRightForOrderSvg /></span>;
+  return (
+    <span {...props}>
+      <ArrowRightForOrderSvg />
+    </span>
+  );
 };
 export const GreenCircleIcon = (props: any) => {
-  return <span {...props}><GreenCircleIconSvg /></span>;
+  return (
+    <span {...props}>
+      <GreenCircleIconSvg />
+    </span>
+  );
 };
 export const ArrowUpIcon = (props: any) => {
-  return <span {...props}><ArrowUpIconSvg /></span>;
+  return (
+    <span {...props}>
+      <ArrowUpIconSvg />
+    </span>
+  );
 };
 export const OverviewMIcon = (props: any) => {
-  return <span {...props}><OverviewMIconSvg /></span>;
+  return (
+    <span {...props}>
+      <OverviewMIconSvg />
+    </span>
+  );
 };
 export const RefMIcon = (props: any) => {
-  return <span {...props}><RefMIconSvg /></span>;
+  return (
+    <span {...props}>
+      <RefMIconSvg />
+    </span>
+  );
 };
 export const OrderlyMIcon = () => {
   return <OrderlyMIconSvg />;
 };
 export const BurrowMIcon = (props: any) => {
-  return <span {...props}><BurrowMIconSvg /></span>;
+  return (
+    <span {...props}>
+      <BurrowMIconSvg />
+    </span>
+  );
 };
 export const OverviewMenuIcon = () => {
   return <OverviewMenuIconSvg />;
@@ -208,18 +296,8 @@ export function CircleBg(props: any) {
   );
 }
 export function DotTopArea(props: any) {
-  return (
-    <img
-      {...props}
-      src={DotTopAreaPNG}
-    ></img>
-  );
+  return <img {...props} src={DotTopAreaPNG}></img>;
 }
 export function DotBottomArea(props: any) {
-  return (
-    <img
-      {...props}
-      src={DotBottomAreaPNG}
-    ></img>
-  );
+  return <img {...props} src={DotBottomAreaPNG}></img>;
 }

@@ -46,7 +46,7 @@ import LockImgIconPng from '../../assets/imgs/LockImgIcon.png';
 import BoostFarmBannerImgPng from '../../assets/imgs/BoostFarmBannerImg.png';
 import NewTagPng from '../../assets/imgs/NewTag.png';
 
-import LoveTokenIconSvg from '../../assets/svg/LoveTokenIcon.svg'
+import LoveTokenIconSvg from '../../assets/svg/LoveTokenIcon.svg';
 
 export const GoldLevel3 = () => {
   return <GoldLevel3Svg />;
@@ -88,100 +88,211 @@ export const NewIcon = () => {
   return <NewIconSvg />;
 };
 
-
 export const CalcIcon = (props: any) => {
-  return <span {...props}><CalcIconSvg /></span>;
+  return (
+    <span {...props}>
+      <CalcIconSvg />
+    </span>
+  );
 };
 export const UpArrowIcon = (props: any) => {
-  return <span {...props}><UpArrowIconSvg /></span>;
+  return (
+    <span {...props}>
+      <UpArrowIconSvg />
+    </span>
+  );
 };
 export const ArrowLeftIcon = (props: any) => {
-  return <span {...props}><ArrowLeftIconSvg /></span>;
+  return (
+    <span {...props}>
+      <ArrowLeftIconSvg />
+    </span>
+  );
 };
 export const GoldLevel1 = (props: any) => {
-  return <span {...props}><GoldLevel1Svg /></span>;
+  return (
+    <span {...props}>
+      <GoldLevel1Svg />
+    </span>
+  );
 };
 export const GoldLevel2 = (props: any) => {
-  return <span {...props}><GoldLevel2Svg /></span>;
+  return (
+    <span {...props}>
+      <GoldLevel2Svg />
+    </span>
+  );
 };
 export const ArrowDownIcon = (props: any) => {
-  return <span {...props}><ArrowDownIconSvg /></span>;
+  return (
+    <span {...props}>
+      <ArrowDownIconSvg />
+    </span>
+  );
 };
 export const SearchIcon = (props: any) => {
-  return <span {...props}><SearchIconSvg /></span>;
+  return (
+    <span {...props}>
+      <SearchIconSvg />
+    </span>
+  );
 };
 export const ForbiddenIcon = (props: any) => {
-  return <span {...props}><ForbiddenIconSvg /></span>;
+  return (
+    <span {...props}>
+      <ForbiddenIconSvg />
+    </span>
+  );
 };
 export const FreenWarningIcon = (props: any) => {
-  return <span {...props}><FreenWarningIconSvg /></span>;
+  return (
+    <span {...props}>
+      <FreenWarningIconSvg />
+    </span>
+  );
 };
 export const BoostOptIcon = (props: any) => {
-  return <span {...props}><BoostOptIconSvg /></span>;
+  return (
+    <span {...props}>
+      <BoostOptIconSvg />
+    </span>
+  );
 };
 export const NearOptIcon = (props: any) => {
-  return <span {...props}><NearOptIconSvg /></span>;
+  return (
+    <span {...props}>
+      <NearOptIconSvg />
+    </span>
+  );
 };
 export const EthOptIcon = (props: any) => {
-  return <span {...props}><EthOptIconSvg /></span>;
+  return (
+    <span {...props}>
+      <EthOptIconSvg />
+    </span>
+  );
 };
 export const OthersOptIcon = (props: any) => {
-  return <span {...props}><OthersOptIconSvg /></span>;
+  return (
+    <span {...props}>
+      <OthersOptIconSvg />
+    </span>
+  );
 };
 export const MigrateIcon = (props: any) => {
-  return <span {...props}><MigrateIconSvg /></span>;
+  return (
+    <span {...props}>
+      <MigrateIconSvg />
+    </span>
+  );
 };
 export const MigrateIconSmall = (props: any) => {
-  return <span {...props}><MigrateIconSmallSvg /></span>;
+  return (
+    <span {...props}>
+      <MigrateIconSmallSvg />
+    </span>
+  );
 };
 export const MigrateIconMiddle = (props: any) => {
-  return <span {...props}><MigrateIconMiddleSvg /></span>;
+  return (
+    <span {...props}>
+      <MigrateIconMiddleSvg />
+    </span>
+  );
 };
 export const WarningIcon = (props: any) => {
-  return <span {...props}><WarningIconSvg /></span>;
+  return (
+    <span {...props}>
+      <WarningIconSvg />
+    </span>
+  );
 };
 export const BoostFarmNoDataIcon = (props: any) => {
-  return <span {...props}><BoostFarmNoDataIconSvg /></span>;
+  return (
+    <span {...props}>
+      <BoostFarmNoDataIconSvg />
+    </span>
+  );
 };
 export const BoostDotIcon = (props: any) => {
-  return <span {...props}><BoostDotIconSvg /></span>;
+  return (
+    <span {...props}>
+      <BoostDotIconSvg />
+    </span>
+  );
 };
 export const ForbiddonIcon = (props: any) => {
-  return <span {...props}><ForbiddonIconSvg /></span>;
+  return (
+    <span {...props}>
+      <ForbiddonIconSvg />
+    </span>
+  );
 };
 export const StableOption = (props: any) => {
-  return <span {...props}><StableOptionSvg /></span>;
+  return (
+    <span {...props}>
+      <StableOptionSvg />
+    </span>
+  );
 };
 export const DclFarmIcon = (props: any) => {
-  return <span {...props}><DclFarmIconSvg /></span>;
+  return (
+    <span {...props}>
+      <DclFarmIconSvg />
+    </span>
+  );
 };
 export const NFTIdIcon = (props: any) => {
-  return <span {...props}><NFTIdIconSvg /></span>;
+  return (
+    <span {...props}>
+      <NFTIdIconSvg />
+    </span>
+  );
 };
 export const CrossIconEmpty = (props: any) => {
-  return <span {...props}><CrossIconEmptySvg /></span>;
+  return (
+    <span {...props}>
+      <CrossIconEmptySvg />
+    </span>
+  );
 };
 export const CrossIconFull = (props: any) => {
-  return <span {...props}><CrossIconFullSvg /></span>;
+  return (
+    <span {...props}>
+      <CrossIconFullSvg />
+    </span>
+  );
 };
 export const LinkArrowIcon = (props: any) => {
-  return <span {...props}><LinkArrowIconSvg /></span>;
+  return (
+    <span {...props}>
+      <LinkArrowIconSvg />
+    </span>
+  );
 };
 export const DownArrowIcon = (props: any) => {
-  return <span {...props}><DownArrowIconSvg /></span>;
+  return (
+    <span {...props}>
+      <DownArrowIconSvg />
+    </span>
+  );
 };
 export const GreenCorrectIcon = (props: any) => {
-  return <span {...props}><GreenCorrectIconSvg /></span>;
+  return (
+    <span {...props}>
+      <GreenCorrectIconSvg />
+    </span>
+  );
 };
 
 export const LockImgIcon = () => {
-  return <img src={LockImgIconPng}/>
+  return <img src={LockImgIconPng} />;
 };
 export const BoostFarmBannerImg = (props: any) => {
-  return <img {...props} src={BoostFarmBannerImgPng}/>
+  return <img {...props} src={BoostFarmBannerImgPng} />;
 };
 export const NewTag = (props: any) => {
-  return <img {...props} src={NewTagPng}/>
+  return <img {...props} src={NewTagPng} />;
 };
 
 export const DirectionButton = function (props: any) {
@@ -209,7 +320,6 @@ export const LightningBase64 = function () {
 export const LightningBase64Grey = function () {
   return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTkiIHZpZXdCb3g9IjAgMCAxOCAxOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgZmlsdGVyPSJ1cmwoI2ZpbHRlcjBfZl8xOTI4XzMwKSI+CjxjaXJjbGUgY3g9IjkuMzg0NjciIGN5PSI5LjQ2MTA5IiByPSI0LjYxNTM4IiBmaWxsPSIjNzM4MThCIiBmaWxsLW9wYWNpdHk9IjAuNCIvPgo8L2c+CjxwYXRoIGQ9Ik05LjY2NDE2IDMuMDA0N0M5LjgxNzg0IDMuMDQ0NyA5Ljg0MjMxIDMuMzA5NDQgOS44NDUyNSAzLjgyODQ1TDkuODQ2MjMgNi44MTAxNUM5Ljg0NjIzIDcuMDM0ODkgOS44NDYyMyA3LjE0NzI3IDkuOTE3NjkgNy4yMTY3OEM5Ljk3NzM5IDcuMjczOTIgMTAuMDY3NCA3LjI4NDQgMTAuMjI5OSA3LjI4NjNIMTEuMzc2MkMxMi44NzM4IDcuMjg2MyAxMy42MjE2IDcuMjg2MyAxMy45MDQ1IDcuNzU5NkMxNC4xODg0IDguMjMyOSAxMy44MTg0IDguODY2MTkgMTMuMDc4NCAxMC4xMzE4TDEwLjc2MTQgMTQuMTAwMUMxMC4zOTQ0IDE0LjcyODYgMTAuMjEwNCAxNS4wNDI5IDEwLjAyODMgMTQuOTk1M0M5Ljg0NjIzIDE0Ljk0OTYgOS44NDYyMyAxNC41ODg2IDkuODQ2MjMgMTMuODY1OFYxMS4xOTA4QzkuODQ2MjMgMTAuOTY2IDkuODQ2MjMgMTAuODUzNyA5Ljc3NDc3IDEwLjc4NDJDOS43MDMzMiAxMC43MTQ2IDkuNTg3ODEgMTAuNzE0NiA5LjM1NjgxIDEwLjcxNDZINy44NDQ0OUM2LjY1OTExIDEwLjcwODkgNi4wMzk1IDEwLjY2MjMgNS43ODc5NCAxMC4yNDEzQzUuNTA0MDcgOS43NjgwMyA1Ljg3NDA4IDkuMTM0NzUgNi42MTQwOCA3Ljg2OTEyTDguOTMxMDEgMy45MDA4M0M5LjI5ODA4IDMuMjcyMyA5LjQ4MjEgMi45NTcwOCA5LjY2NDE2IDMuMDA0N1oiIGZpbGw9IiM3MzgxOEIiLz4KPGRlZnM+CjxmaWx0ZXIgaWQ9ImZpbHRlcjBfZl8xOTI4XzMwIiB4PSIwLjc2OTI4NyIgeT0iMC44NDU3MDMiIHdpZHRoPSIxNy4yMzA3IiBoZWlnaHQ9IjE3LjIzMDUiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJCYWNrZ3JvdW5kSW1hZ2VGaXgiIHJlc3VsdD0ic2hhcGUiLz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMiIgcmVzdWx0PSJlZmZlY3QxX2ZvcmVncm91bmRCbHVyXzE5MjhfMzAiLz4KPC9maWx0ZXI+CjwvZGVmcz4KPC9zdmc+';
 };
-
 
 export const LoveIcon = function (props: any) {
   const { linear0, linear1, linear2 } = props;
@@ -284,7 +394,11 @@ export const LoveIcon = function (props: any) {
 };
 
 export const LoveTokenIcon = function (props: any) {
-  return <span {...props}><LoveTokenIconSvg/></span>
+  return (
+    <span {...props}>
+      <LoveTokenIconSvg />
+    </span>
+  );
 };
 
 export const CrossIconLittle = (props: any) => {

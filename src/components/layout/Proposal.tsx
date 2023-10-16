@@ -35,11 +35,7 @@ import {
   FarmProposalGrayButton,
   YouVotedButton,
 } from '../button/Button';
-import {
-  ModalWrapper,
-  CalenderIcon,
-  RewardCard,
-} from '../../pages/ReferendumPage';
+import { CalenderIcon, RewardCard } from '../../pages/ReferendumPage';
 import Modal from 'react-modal';
 import { Images, Symbols } from '../stableswap/CommonComp';
 import {
@@ -151,6 +147,7 @@ import ReactTooltip from 'react-tooltip';
 import { DownArrowLightMobile } from '../icon/Arrows';
 import { getProposalHashes, ProposalHash } from '../../services/indexer';
 import { openUrl } from '../../services/commonV3';
+import { ModalWrapper } from '~components/modalWrapper/ModalWrapper';
 
 const VotedOnlyKey = 'REF_FI_GOV_PROPOSAL_VOTED_ONLY';
 const BonusOnlyKey = 'REF_FI_GOV_PROPOSAL_BONUS_ONLY';

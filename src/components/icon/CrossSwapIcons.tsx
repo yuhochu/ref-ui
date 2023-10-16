@@ -6,10 +6,10 @@ import RefSwapProSvg from '../../assets/svg/RefSwapPro.svg';
 import TriAndAuroraSvg from '../../assets/svg/TriAndAurora.svg';
 import TriAndAuroraLedgerSvg from '../../assets/svg/TriAndAuroraLedger.svg';
 import OrderlyOrderBookIconMobilePNG from '../../assets/imgs/OrderlyOrderBookIconMobile.png';
-import OrderlyOrderBookIconPNG from "../../assets/imgs/OrderlyOrderBookIcon.png"
+import OrderlyOrderBookIconPNG from '../../assets/imgs/OrderlyOrderBookIcon.png';
 
 export const RefSwapPro = () => {
-  return <RefSwapProSvg className='ml-1' />;
+  return <RefSwapProSvg className="ml-1" />;
 };
 export const TriAndAurora = () => {
   return <TriAndAuroraSvg />;

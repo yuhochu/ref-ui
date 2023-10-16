@@ -53,7 +53,6 @@ export const HeavyWarning = () => {
   return <HeavyWarningSvg />;
 };
 
-
 export function Logo() {
   return (
     <svg

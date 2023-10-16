@@ -10,10 +10,10 @@ import HandIconSvg from '../../assets/svg/HandIcon.svg';
 import LinkIconSvg from '../../assets/svg/LinkIcon.svg';
 import CheckboxSvg from '../../assets/svg/Checkbox.svg';
 import CheckboxSelectedSvg from '../../assets/svg/CheckboxSelected.svg';
-import DotsSvg from "../../assets/svg/Dots.svg"
+import DotsSvg from '../../assets/svg/Dots.svg';
 import IncentivePopupSvg from '../../assets/svg/IncentivePopup.svg';
 
-import LightSmallPNG from "../../assets/imgs/LightSmall.png";
+import LightSmallPNG from '../../assets/imgs/LightSmall.png';
 
 const ArrowDown = () => {
   return <ArrowDownSvg />;
@@ -43,14 +43,26 @@ const ArrowDownHollow = () => {
   return <ArrowDownHollowSvg />;
 };
 const Checkbox = (props: any) => {
-  return <span {...props}><CheckboxSvg /></span>;
+  return (
+    <span {...props}>
+      <CheckboxSvg />
+    </span>
+  );
 };
 const CheckboxSelected = (props: any) => {
-  return <span {...props}><CheckboxSelectedSvg /></span>;
+  return (
+    <span {...props}>
+      <CheckboxSelectedSvg />
+    </span>
+  );
 };
 
 const Dots = () => {
-  return  <div className="absolute left-0 bottom-0"><DotsSvg /></div>
+  return (
+    <div className="absolute left-0 bottom-0">
+      <DotsSvg />
+    </div>
+  );
 };
 
 export const IncentivePopup = () => {
@@ -357,9 +369,7 @@ export function NoDataIcon() {
 }
 
 export function LightSmall() {
-  return (
-    <img src={LightSmallPNG} alt={"lm"}/>
-  );
+  return <img src={LightSmallPNG} alt={'lm'} />;
 }
 export {
   ArrowDown,

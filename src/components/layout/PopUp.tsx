@@ -7,7 +7,7 @@ import {
   Learn_more_m,
   CloseBtn_white,
   CircleCloseBtn,
-  PopupCloseButton
+  PopupCloseButton,
 } from '~components/icon/Common';
 import { isMobile } from '~utils/device';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -46,7 +46,7 @@ export default function PopUpSwiper() {
             mobile ? 'farmPopupBoxMobile' : 'farmPopupBox'
           }`}
           style={{
-            zIndex: 92
+            zIndex: 92,
           }}
         >
           <Swiper
@@ -55,21 +55,21 @@ export default function PopUpSwiper() {
             autoHeight={false}
             autoplay={{
               delay: 3500,
-              disableOnInteraction: false
+              disableOnInteraction: false,
             }}
             loop={true}
           >
             <SwiperSlide>
-              <div className='absolute bottom-1'>
+              <div className="absolute bottom-1">
                 <div
                   onClick={closePop}
-                  className='flex justify-end items-center absolute right-2.5 cursor-pointer'
+                  className="flex justify-end items-center absolute right-2.5 cursor-pointer"
                   style={{ bottom: '5.5rem' }}
                 >
-                  <PopupCloseButton className='cursor-pointer'></PopupCloseButton>
+                  <PopupCloseButton className="cursor-pointer"></PopupCloseButton>
                 </div>
                 <V2Pool
-                  className='cursor-pointer'
+                  className="cursor-pointer"
                   onClick={() => {
                     localStorage.setItem('REF_FI_POOL_ACTIVE_TAB_VALUE', 'v2');
                     location.href = '/pools';
@@ -78,16 +78,16 @@ export default function PopUpSwiper() {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className='absolute bottom-1'>
+              <div className="absolute bottom-1">
                 <div
                   onClick={closePop}
-                  className='flex justify-end items-center absolute right-2.5 cursor-pointer'
+                  className="flex justify-end items-center absolute right-2.5 cursor-pointer"
                   style={{ bottom: '5.5rem' }}
                 >
-                  <PopupCloseButton className='cursor-pointer'></PopupCloseButton>
+                  <PopupCloseButton className="cursor-pointer"></PopupCloseButton>
                 </div>
                 <PNEARFarmIcon
-                  className='cursor-pointer'
+                  className="cursor-pointer"
                   onClick={() => {
                     location.href = '/poolV2/phoenix-bonds.near@wrap.near@2000';
                   }}
@@ -102,13 +102,9 @@ export default function PopUpSwiper() {
 }
 
 function PNEARFarmIcon(props: any) {
-  return (
-    <img{...props} src={PNEARFarmIconPNG} />
-  );
+  return <img {...props} src={PNEARFarmIconPNG} />;
 }
 
 function V2Pool(props: any) {
-  return (
-    <img {...props} src={V2PoolPNG} />
-  );
+  return <img {...props} src={V2PoolPNG} />;
 }

@@ -50,7 +50,7 @@ import HappyHolidaysTextSvg from '../../assets/svg/HappyHolidaysText.svg';
 
 import NearIconSvg from '../../assets/svg/NearIcon.svg';
 
-import ArcIconPNG from "../../assets/imgs/ArcIcon.png"
+import ArcIconPNG from '../../assets/imgs/ArcIcon.png';
 
 const Learn_more = () => {
   return <Learn_moreSvg />;
@@ -119,7 +119,7 @@ const TipBoxBig = () => {
 };
 
 export const ArcIcon = () => {
-  return <img src={ArcIconPNG} alt={''}/>;
+  return <img src={ArcIconPNG} alt={''} />;
 };
 
 const SnowBar = () => {
@@ -141,60 +141,132 @@ const XmasTree = () => {
 };
 
 export const OutLinkIcon = (props: any) => {
-  return <span {...props}><OutLinkIcon2Svg /></span>;
+  return (
+    <span {...props}>
+      <OutLinkIcon2Svg />
+    </span>
+  );
 };
 export const PopupCloseButton = (props: any) => {
-  return <span {...props}><PopupCloseButtonSvg /></span>;
+  return (
+    <span {...props}>
+      <PopupCloseButtonSvg />
+    </span>
+  );
 };
 export const SelectTokenCloseButton = (props: any) => {
-  return <span {...props}><SelectTokenCloseButtonSvg /></span>;
+  return (
+    <span {...props}>
+      <SelectTokenCloseButtonSvg />
+    </span>
+  );
 };
 export const SwiperCloseButton = (props: any) => {
-  return <span {...props}><SwiperCloseButtonSvg /></span>;
+  return (
+    <span {...props}>
+      <SwiperCloseButtonSvg />
+    </span>
+  );
 };
 
 export const CircleIconLarge = (props: any) => {
-  return <span {...props}><CircleIconLargeSvg /></span>;
+  return (
+    <span {...props}>
+      <CircleIconLargeSvg />
+    </span>
+  );
 };
 export const AddButtonIcon = (props: any) => {
-  return <span {...props}><AddButtonIconSvg /></span>;
+  return (
+    <span {...props}>
+      <AddButtonIconSvg />
+    </span>
+  );
 };
 export const MoreButtonIcon = (props: any) => {
-  return <span {...props}><MoreButtonIconSvg /></span>;
+  return (
+    <span {...props}>
+      <MoreButtonIconSvg />
+    </span>
+  );
 };
 export const SelectedButtonIcon = (props: any) => {
-  return <span {...props}><SelectedButtonIconSvg /></span>;
+  return (
+    <span {...props}>
+      <SelectedButtonIconSvg />
+    </span>
+  );
 };
 export const SetButtonIcon = (props: any) => {
-  return <span {...props}><SetButtonIconSvg /></span>;
+  return (
+    <span {...props}>
+      <SetButtonIconSvg />
+    </span>
+  );
 };
 export const ReturnArrowButtonIcon = (props: any) => {
-  return <span {...props}><ReturnArrowButtonIconSvg /></span>;
+  return (
+    <span {...props}>
+      <ReturnArrowButtonIconSvg />
+    </span>
+  );
 };
 export const DeleteButtonIcon = (props: any) => {
-  return <span {...props}><DeleteButtonIconSvg /></span>;
+  return (
+    <span {...props}>
+      <DeleteButtonIconSvg />
+    </span>
+  );
 };
 export const PinEmpty = (props: any) => {
-  return <span {...props}><PinEmptySvg /></span>;
+  return (
+    <span {...props}>
+      <PinEmptySvg />
+    </span>
+  );
 };
 export const PinSolid = (props: any) => {
-  return <span {...props}><PinSolidSvg /></span>;
+  return (
+    <span {...props}>
+      <PinSolidSvg />
+    </span>
+  );
 };
 export const CommonCloseButton = (props: any) => {
-  return <span {...props}><CommonCloseButtonSvg /></span>;
+  return (
+    <span {...props}>
+      <CommonCloseButtonSvg />
+    </span>
+  );
 };
 export const DefaultTokenImg = (props: any) => {
-  return <span {...props}><DefaultTokenImgSvg /></span>;
+  return (
+    <span {...props}>
+      <DefaultTokenImgSvg />
+    </span>
+  );
 };
 
 const AddV2LiquidityBanner = (props: any) => {
-  return <span {...props}><AddV2LiquidityBannerSvg /></span>;
+  return (
+    <span {...props}>
+      <AddV2LiquidityBannerSvg />
+    </span>
+  );
 };
 const XmasGiftReadyBanner = (props: any) => {
-  return <span {...props}><XmasGiftReadyBannerSvg /></span>;
+  return (
+    <span {...props}>
+      <XmasGiftReadyBannerSvg />
+    </span>
+  );
 };
 const HappyHolidaysText = (props: any) => {
-  return <span {...props}><HappyHolidaysTextSvg /></span>;
+  return (
+    <span {...props}>
+      <HappyHolidaysTextSvg />
+    </span>
+  );
 };
 
 const CloseBtn = (props: any) => {
@@ -448,7 +520,6 @@ export const CircleCloseBtn = (props: any) => {
     </svg>
   );
 };
-
 
 export const MappingAccountIcon = () => {
   const Unit = () => {

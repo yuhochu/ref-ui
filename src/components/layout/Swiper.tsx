@@ -81,14 +81,14 @@ export default function AdSwiper() {
 }
 
 const Perp = () => {
-  return <img src={PerpPNG} alt={""}/>;
+  return <img src={PerpPNG} alt={''} />;
 };
 const PerpMobile = () => {
-  return <img src={PerpMobilePNG} alt={""}/>;
+  return <img src={PerpMobilePNG} alt={''} />;
 };
 const StablePool = () => {
-  return <img src={StablePoolPNG} alt={""}/>;
+  return <img src={StablePoolPNG} alt={''} />;
 };
 const StablePoolMobile = () => {
-  return <img src={StablePoolMobilePNG} alt={""}/>;
+  return <img src={StablePoolMobilePNG} alt={''} />;
 };
