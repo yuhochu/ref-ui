@@ -28,7 +28,7 @@ import React from 'react';
 // import Overview from '~pages/Overview';
 // import PortfolioOrderly from '~pages/Orderly/PorfolioOrderly';
 import SwapPage from '~pages/SwapPage';
-
+import SwapPageYu from '~pages/SwapPageYu/SwapPageYu';
 const PageRouter = () => {
   return (
     <Switch>
@@ -96,6 +96,7 @@ const PageRouter = () => {
 
       {/*<Route path="/overview" component={AutoHeight(Overview)} />*/}
       {/*<Route path="/orderly" component={AutoHeight(PortfolioOrderly)} />*/}
+      <Route path="/yu" component={SwapPageYu} />
       <Route path="/" component={AutoHeight(SwapPage)} />
     </Switch>
   );
