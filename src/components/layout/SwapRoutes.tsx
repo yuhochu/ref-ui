@@ -1765,6 +1765,7 @@ export const TradeRoute = ({
 }) => {
   if (!tokenIn || !tokenOut) return null;
 
+console.log("tradetradetrade",trade)
   if (!trade || !trade?.availableRoute || tokenIn?.id === tokenOut?.id) {
     return (
       <div className="frcb relative">

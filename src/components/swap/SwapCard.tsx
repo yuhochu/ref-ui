@@ -743,8 +743,11 @@ export default function SwapCard(props: {
   const { selectMarket, trades, enableTri, swapType } =
     useContext(SwapProContext);
 
-  const selectTrade = trades?.[selectMarket];
+  console.log("tradestradestrades",trades)
+  console.log("selectMarketselectMarket",selectMarket)
 
+  const selectTrade = trades?.[selectMarket];
+console.log("selectTradeselectTradeselectTrade",selectTrade)
   const [urlTokenIn, urlTokenOut, urlSlippageTolerance] = decodeURIComponent(
     location.hash.slice(1)
   ).split(TOKEN_URL_SEPARATOR);
@@ -1331,6 +1334,7 @@ export default function SwapCard(props: {
         )}
 
         <div className="mt-4">
+          DetailView
           <DetailView
             show={canShowDetailView && showDetails}
             trade={selectTrade}

@@ -9,11 +9,38 @@ import {
   toNonDivisibleNumber,
   toPrecision
 } from "~utils/numbers";
-import { getPriceImpact } from "~state/swap";
+import { getPriceImpact, REF_FI_BEST_MARKET_ROUTE } from "~state/swap";
 import db from "~store/RefDatabase";
 import React from "react";
 
-export const getEstimate = async ({ tokenIn, tokenOut, tokenInAmount = "1", tokenPriceList, slippageTolerance }) => {
+export const getEstimate=async({ tokenIn, tokenOut, tokenInAmount = "1", tokenPriceList, slippageTolerance })=>{
+  const refEstimate = getEstimateRef({ tokenIn, tokenOut, tokenInAmount, tokenPriceList, slippageTolerance })
+  const trades = {
+    ref: refEstimate,
+    // ['tri']: resAurora,
+    // ['orderly']: resOrderly,
+  };
+
+  const bestMarket = Object.keys(trades).reduce((a, b) => {
+    return new Big(
+      trades[a].availableRoute ? trades[a].tokenOutAmount || '0' : '0'
+    ).gt(trades[b].availableRoute ? trades[b].tokenOutAmount || '0' : '0')
+      ? a
+      : b;
+  });
+
+  sessionStorage.setItem(
+    REF_FI_BEST_MARKET_ROUTE,
+    trades[bestMarket].availableRoute === true ? bestMarket : 'ref'
+  );
+console.log("bestMarketbestMarket",bestMarket)
+  const selectedMarket = trades[bestMarket].availableRoute === true ? bestMarket :'ref'
+console.log("selectedMarketselectedMarket",selectedMarket)
+  return trades.ref
+}
+
+
+export const getEstimateRef = async ({ tokenIn, tokenOut, tokenInAmount = "1", tokenPriceList, slippageTolerance }) => {
   // setCanSwap(false);
   // setQuoteDone(false);
 
@@ -156,15 +183,25 @@ export const getEstimate = async ({ tokenIn, tokenOut, tokenInAmount = "1", toke
       )
       : null;
 
+
+    const refClassicEstimates = estimates?.map((s) => ({ ...s, contract: "Ref_Classic" }))
+    const trades={
+
+    }
+
     return {
+      availableRoute:true,
       tokenIn,
       tokenOut,
       estimates,
+      pools: estimates?.map((estimate) => estimate.pool),
       trades: estimates?.map((s) => ({ ...s, contract: "Ref_Classic" })),
       priceImpact,
       tokenOutAmount,
       minAmountOut,
-      fee: setAverageFee(estimates)
+      fee: setAverageFee(estimates),
+      market: 'ref',
+      exchange_name: <div className="text-white">Ref</div>,
     };
   } catch (e) {
     console.log("errr", e);

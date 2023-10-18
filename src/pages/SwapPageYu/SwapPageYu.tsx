@@ -63,7 +63,7 @@ const SwapPageYu = () => {
   };
 
   const { estimates, priceImpact, tokenOutAmount, minAmountOut, fee, trades } = estimate || {};
-
+  console.log("estimateestimate", estimate);
   const handleModalOpen = (name, data) => {
     setModal({ name, data });
   };
@@ -243,7 +243,7 @@ const TokenData = ({ setTokenIn, setTokenOut, tokenList, tokenPriceList }) => {
 
 
 const SelectToken2 = ({ tokenList, tokenPriceList, onClick }) => {
-  console.log("render tokenList", tokenList);
+  // console.log("render tokenList", tokenList);
   return (
     <div className={"flex"}>
       {tokenList?.filter((token) => !!token).map((token, index) => {
@@ -276,8 +276,8 @@ const SelectToken2 = ({ tokenList, tokenPriceList, onClick }) => {
 
 const MemoTokenList = React.memo(SelectToken2, (prev, next) => {
   if (!prev?.tokenList || !prev?.tokenPriceList) {
-    console.log("prev?.tokenList",prev?.tokenList)
-    console.log("prev?.tokenList",prev?.tokenList)
+    console.log("prev?.tokenList", prev?.tokenList);
+    console.log("prev?.tokenList", prev?.tokenList);
     return false;
   }
   const isCached = (

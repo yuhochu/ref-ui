@@ -356,11 +356,13 @@ function SwapPage() {
                   />
                 </div>
 
-                <TradeRoute
-                  trade={trades?.[selectMarket]}
-                  tokenIn={tokenIn}
-                  tokenOut={tokenOut}
-                />
+                {/*<TradeRoute*/}
+                {/*  selectMarket={selectMarket}*/}
+                {/*  trades={trades}*/}
+                {/*  trade={trades?.[selectMarket]}*/}
+                {/*  tokenIn={tokenIn}*/}
+                {/*  tokenOut={tokenOut}*/}
+                {/*/>*/}
               </>
             ) : (
               <div
