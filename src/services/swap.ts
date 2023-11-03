@@ -419,6 +419,7 @@ export const estimateSwap = async ({
     );
   };
 
+  console.log("ssswap1", new Date())
   let { filteredPools: pools, pool_protocol } = await getPoolsByTokens({
     tokenInId: tokenIn.id,
     tokenOutId: tokenOut.id,
@@ -429,7 +430,7 @@ export const estimateSwap = async ({
     tokenOut,
     proGetCachePool,
   });
-
+  console.log("ssswap2", new Date())
   pools = pools.filter((p: any) => {
     return getLiquidity(p, tokenIn, tokenOut) > 0;
   });
@@ -444,13 +445,13 @@ export const estimateSwap = async ({
     amountIn,
     parsedAmountIn
   );
-
+  console.log("ssswap3", new Date())
   if (supportLedger || pool_protocol === 'rpc') {
     return { estimates: supportLedgerRes, tag };
   }
 
   const orpools = await getRefPoolsByToken1ORToken2(tokenIn.id, tokenOut.id);
-
+  console.log("ssswap4", new Date())
   let stableSmartActionsV2;
 
   let res;
@@ -463,7 +464,7 @@ export const estimateSwap = async ({
       tokenOut.id,
       parsedAmountIn
     );
-
+    console.log("ssswap5", new Date())
     res = stableSmartActionsV2;
 
     smartRouteV2OutputEstimate = stableSmartActionsV2
@@ -483,7 +484,7 @@ export const estimateSwap = async ({
       amountIn,
       loadingTrigger
     );
-
+    console.log("ssswap5", new Date())
     const hybridStableSmartOutputEstimate =
       hybridStableSmart.estimate.toString();
 
