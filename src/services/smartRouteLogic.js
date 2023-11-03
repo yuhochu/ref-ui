@@ -2096,6 +2096,8 @@ function shortestPath(g, src, dst, ignore_nodes = [], ignore_edges = []) {
     let edgeNow = ignore_edges[edgeInd];
     gTemp = deleteEdge(gTemp, edgeNow);
   }
+  console.log("gTempgTemp",gTemp)
+  console.log("srrc",src)
   let solution = dijkstra(gTemp, src)[dst];
   solution.path.unshift(src); // original algorithm doesn't include source node in path
   return solution;
