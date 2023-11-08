@@ -492,6 +492,19 @@ class RefDatabase extends Dexie {
     );
   }
 
+  public async cacheTopPoolsAppend(pools: any) {
+console.log("cacheTopPoolsAppend",this.topPools)
+    await this.topPools.bulkPut(
+      pools.map((topPool: TopPool) => ({
+        ...topPool,
+        id: topPool.id.toString(),
+        update_time: moment().unix(),
+        token1Id: topPool.token_account_ids[0],
+        token2Id: topPool.token_account_ids[1],
+      }))
+    );
+  }
+
   public async checkTopPools() {
     const pools = await this.topPools.limit(10).toArray();
     return (

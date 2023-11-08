@@ -66,7 +66,7 @@ import {
   percent,
   checkAllocations,
 } from '../../utils/numbers';
-import { useMobile, useClientMobile, isClientMobie } from '../../utils/device';
+import { useMobile, useClientMobile, isClientMobie, isMobile } from '../../utils/device';
 import {
   usePoolsMorePoolIds,
   useDayVolumesPools,
@@ -114,6 +114,7 @@ import { ALL_STABLE_POOL_IDS } from '../../services/near';
 import { WatchList } from '../../store/RefDatabase';
 import { REF_FI_CONTRACT_ID } from '../../services/near';
 import { FarmBoost } from '../../services/farm';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 import {
   get_all_seeds,
@@ -2076,6 +2077,7 @@ function WatchListCard({
 }
 function PcLiquidityPage({
   pools,
+  isFetching,
   sortBy,
   tokenName,
   order,
@@ -2103,6 +2105,7 @@ function PcLiquidityPage({
   farmAprById,
 }: {
   pools: Pool[];
+  isFetching?:boolean;
   switchActiveTab: (tab: string) => void;
   activeTab: string;
   poolTokenMetas: any;
@@ -2880,7 +2883,16 @@ function PcLiquidityPage({
                 </p>
               </header>
 
-              <div className="max-h-96 overflow-y-auto  pool-list-container-pc">
+              <div id="poolscroll" className="max-h-96 overflow-y-auto  pool-list-container-pc">
+
+
+                <InfiniteScroll
+                  next={nextPage}
+                  hasMore={true}
+                  dataLength={pools?.length}
+                  loader={<div className={"flex justify-center text-white"}>Loading</div>}
+                  scrollableTarget={'poolscroll'}
+                >
                 {pools
                   ?.filter(poolFilterFunc)
                   .sort(poolReSortingFunc)
@@ -2899,6 +2911,7 @@ function PcLiquidityPage({
                       watched={!!find(watchPools, { id: pool.id })}
                     />
                   ))}
+                </InfiniteScroll>
               </div>
             </section>
           </Card>
@@ -3133,11 +3146,12 @@ export default function LiquidityPage() {
   } = useWatchPools();
   const [hideLowTVL, setHideLowTVL] = useState<Boolean>(false);
   const [displayPools, setDisplayPools] = useState<Pool[]>();
-  const { pools, hasMore, nextPage, loading, volumes } = usePools({
+  const { pools, hasMore, nextPage, loading,isFetching, volumes } = usePools({
     tokenName,
     sortBy,
     order,
   });
+  console.log("poolspoolspools",pools)
 
   const tokenPriceList = useTokenPriceList();
 
@@ -3230,6 +3244,7 @@ export default function LiquidityPage() {
     }
     setDisplayPools(tempPools);
   }, [pools, hideLowTVL, farmOnly, farmCounts]);
+
   const poolTokenMetas = usePoolTokens(pools);
 
   const onSearch = useCallback(
@@ -3317,6 +3332,7 @@ export default function LiquidityPage() {
     >
       {!clientMobileDevice && (
         <PcLiquidityPage
+          isFetching={isFetching}
           farmAprById={farmAprById}
           poolTokenMetas={poolTokenMetas}
           activeTab={activeTab}

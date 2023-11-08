@@ -16,7 +16,7 @@ import { getDCLTopBinFee } from '../services/indexer';
 import { list_pools } from '../services/swapV3';
 import { WRAP_NEAR_CONTRACT_ID } from '../services/wrap-near';
 import { getStorageTokenId } from '../components/swap/swap';
-import { wrapTokenId } from '../components/swap/LimitOrderCard';
+import { wrapTokenId } from '../components/swap/LimitOrderCard/LimitOrderCard';
 
 export const useMyOrders = () => {
   const [activeOrder, setActiveOrder] = useState<UserOrderInfo[]>();

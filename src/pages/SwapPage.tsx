@@ -19,7 +19,7 @@ import {
 } from '../services/wrap-near';
 
 import AdSwiper from '../components/layout/Swiper';
-import LimitOrderCard from '../components/swap/LimitOrderCard';
+import LimitOrderCard from '../components/swap/LimitOrderCard/LimitOrderCard';
 import SwapRateChart from '../components/swap/SwapRateChart';
 import SwapLimitOrderChart from '../components/swap/SwapLimitOrderChart';
 import { EstimateSwapView } from '../services/swap';

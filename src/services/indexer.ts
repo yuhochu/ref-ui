@@ -5,7 +5,7 @@ import {
   STABLE_TOKEN_USN_IDS,
   AllStableTokenIds,
   CUSDIDS,
-  BTCIDS,
+  BTCIDS
 } from './near';
 import _ from 'lodash';
 import { parsePoolView, PoolRPCView, getCurrentUnixTime } from './api';
@@ -18,7 +18,7 @@ import { parsePool } from './pool';
 import {
   filterBlackListPools,
   ALL_STABLE_POOL_IDS,
-  STABLE_POOL_ID,
+  STABLE_POOL_ID
 } from './near';
 
 import { getPool as getPoolRPC } from '../services/pool';
@@ -34,17 +34,17 @@ const genUrlParams = (props: Record<string, string | number>) => {
 };
 
 export const getPoolsByTokensIndexer = async ({
-  token0,
-  token1,
-}: {
+                                                token0,
+                                                token1
+                                              }: {
   token0: string;
   token1: string;
 }) => {
   const res1 = await fetch(
     config.indexerUrl +
-      `/list-pools-by-tokens?token0=${token0}&token1=${token1}`,
+    `/list-pools-by-tokens?token0=${token0}&token1=${token1}`,
     {
-      method: 'GET',
+      method: 'GET'
     }
   ).then((res) => res.json());
 
@@ -59,7 +59,7 @@ export const getPoolMonthVolume = async (
   pool_id: string
 ): Promise<volumeType[]> => {
   return await fetch(config.sodakiApiUrl + `/pool/${pool_id}/volume`, {
-    method: 'GET',
+    method: 'GET'
   })
     .then((res) => res.json())
     .then((monthVolume) => {
@@ -69,7 +69,7 @@ export const getPoolMonthVolume = async (
 
 export const getPoolMonthTVL = async (pool_id: string): Promise<TVLType[]> => {
   return await fetch(config.sodakiApiUrl + `/pool/${pool_id}/tvl`, {
-    method: 'GET',
+    method: 'GET'
   })
     .then((res) => res.json())
     .then((monthTVL) => {
@@ -88,10 +88,11 @@ export const getHistoryOrder = async (
   return await fetch(
     config.indexerUrl + `/get-limit-order-log-by-account/${account_id}`,
     {
-      method: 'GET',
+      method: 'GET'
     }
   ).then((res) => res.json());
 };
+
 export interface HistoryOrderSwapInfo {
   tx_id: string;
   token_in: string;
@@ -119,11 +120,11 @@ interface TokenFlow {
 }
 
 export const getTokenFlow = async ({
-  tokenInAmount,
-  tokenInId,
-  tokenOutId,
-  ledger,
-}: {
+                                     tokenInAmount,
+                                     tokenInId,
+                                     tokenOutId,
+                                     ledger
+                                   }: {
   tokenInId: string;
   tokenOutId: string;
   tokenInAmount: string;
@@ -135,11 +136,11 @@ export const getTokenFlow = async ({
 
   return await fetch(
     config.indexerUrl +
-      `/get-token-flow?token_pair=${token_pair}&swap_amount=${swap_amount}&ledger=${
-        ledger ? 'one' : 'all'
-      }`,
+    `/get-token-flow?token_pair=${token_pair}&swap_amount=${swap_amount}&ledger=${
+      ledger ? 'one' : 'all'
+    }`,
     {
-      method: 'GET',
+      method: 'GET'
     }
   ).then((res) => res.json());
 };
@@ -150,7 +151,7 @@ export const getHistoryOrderSwapInfo = async (
   return await fetch(
     config.indexerUrl + `/get-limit-order-swap-by-account/${account_id}`,
     {
-      method: 'GET',
+      method: 'GET'
     }
   ).then((res) => res.json());
 };
@@ -159,7 +160,7 @@ export const get24hVolume = async (pool_id: string): Promise<string> => {
   return await fetch(
     config.sodakiApiUrl + `/pool/${pool_id}/rolling24hvolume/sum`,
     {
-      method: 'GET',
+      method: 'GET'
     }
   )
     .then((res) => res.json())
@@ -182,9 +183,9 @@ export const get24hVolumes = async (
     const batchIds = pool_ids.slice(i * batchSize, (i + 1) * batchSize);
     const promise = fetch(
       config.sodakiApiUrl +
-        `/poollist/${batchIds.join('|')}/rolling24hvolume/sum`,
+      `/poollist/${batchIds.join('|')}/rolling24hvolume/sum`,
       {
-        method: 'GET',
+        method: 'GET'
       }
     )
       .then((res) => res.json())
@@ -204,18 +205,18 @@ const parseActionView = async (action: any) => {
     txUrl: config.explorerUrl + '/txns/' + action[1],
     data: data,
     // status: action[5] === 'SUCCESS_VALUE',
-    status: action[6] && action[6].indexOf('SUCCESS') > -1,
+    status: action[6] && action[6].indexOf('SUCCESS') > -1
   };
 };
 
 export const getYourPools = async (): Promise<PoolRPCView[]> => {
   return await fetch(
     config.indexerUrl +
-      '/liquidity-pools/' +
-      getCurrentWallet()?.wallet?.getAccountId(),
+    '/liquidity-pools/' +
+    getCurrentWallet()?.wallet?.getAccountId(),
     {
       method: 'GET',
-      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      headers: { 'Content-type': 'application/json; charset=UTF-8' }
     }
   )
     .then((res) => res.json())
@@ -227,7 +228,7 @@ export const getYourPools = async (): Promise<PoolRPCView[]> => {
 export const getTopPoolsIndexer = async () => {
   return await fetch(config.indexerUrl + '/list-top-pools', {
     method: 'GET',
-    headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    headers: { 'Content-type': 'application/json; charset=UTF-8' }
   })
     .then((res) => res.json())
     .then((poolList) => {
@@ -247,7 +248,7 @@ export const getTopPoolsIndexerRaw = async () => {
     const response = await fetch(config.indexerUrl + '/list-top-pools', {
       method: 'GET',
       headers: { 'Content-type': 'application/json; charset=UTF-8' },
-      signal: controller.signal,
+      signal: controller.signal
     });
 
     clearTimeout(timeout);
@@ -266,21 +267,21 @@ export const getTopPoolsIndexerRaw = async () => {
   }
 };
 
-export const getTopPools = async (): Promise<PoolRPCView[]> => {
+export const getTopPools = async (page = 1, size = 100): Promise<{ rawData: any, pools: PoolRPCView[] }> => {
   try {
     let pools: any;
-
-    if (await db.checkTopPools()) {
+    let rawData: any;
+    if (false) {
+    // if (await db.checkTopPools()) {
       pools = await db.queryTopPools();
     } else {
-      pools = await fetch(config.indexerUrl + '/list-top-pools', {
+      rawData = await fetch(`${config.indexerUrl}/list-top-pool-page?page=${page}&size=${size}`, {
         method: 'GET',
-        headers: { 'Content-type': 'application/json; charset=UTF-8' },
+        headers: { 'Content-type': 'application/json; charset=UTF-8' }
       }).then((res) => res.json());
-
       // include non-stable pools on top pool list
       // TODO:
-
+      pools = rawData?.items;
       await Promise.all(
         ALL_STABLE_POOL_IDS.concat(BLACKLIST_POOL_IDS)
           .filter((id) => Number(id) !== Number(STABLE_POOL_ID))
@@ -293,12 +294,12 @@ export const getTopPools = async (): Promise<PoolRPCView[]> => {
             const twoTokenStablePoolIds = (
               await getPoolsByTokensIndexer({
                 token0: ids[0],
-                token1: ids[1],
+                token1: ids[1]
               })
             ).map((p: any) => p.id.toString());
 
             const twoTokenStablePools = await getPoolsByIds({
-              pool_ids: twoTokenStablePoolIds,
+              pool_ids: twoTokenStablePoolIds
             });
 
             if (twoTokenStablePools.length > 0) {
@@ -316,27 +317,24 @@ export const getTopPools = async (): Promise<PoolRPCView[]> => {
           })
       );
 
-      await db.cacheTopPools(pools);
+      await db.cacheTopPoolsAppend(pools);
     }
 
-    pools = pools.map((pool: any) => parsePoolView(pool));
-
-    return pools
-      .filter((pool: { token_account_ids: string | any[]; id: any }) => {
-        return !isStablePool(pool.id) && pool.token_account_ids.length < 3;
-      })
-      .filter(filterBlackListPools);
+    return {
+      pools,
+      rawData
+    };
   } catch (error) {
-    return [];
+    return { pools: [], rawData: { Í } };
   }
 };
 
 export const getAllPoolsIndexer = async (amountThresh?: string) => {
   const rawRes = await fetch(
     config.indexerUrl +
-      `/list-pools?${amountThresh ? `amounts=${amountThresh}` : ''}`,
+    `/list-pools?${amountThresh ? `amounts=${amountThresh}` : ''}`,
     {
-      method: 'GET',
+      method: 'GET'
     }
   ).then((res) => res.json());
 
@@ -346,7 +344,7 @@ export const getAllPoolsIndexer = async (amountThresh?: string) => {
 export const getPool = async (pool_id: string): Promise<PoolRPCView> => {
   return await fetch(config.indexerUrl + '/get-pool?pool_id=' + pool_id, {
     method: 'GET',
-    headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    headers: { 'Content-type': 'application/json; charset=UTF-8' }
   })
     .then((res) => res.json())
     .then((pool) => {
@@ -375,7 +373,7 @@ export const getClassicPoolSwapRecentTransaction = async (props: {
     config.indexerUrl + `/get-recent-transaction-swap?${paramString}`,
     {
       method: 'GET',
-      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      headers: { 'Content-type': 'application/json; charset=UTF-8' }
     }
   )
     .then((res) => res.json())
@@ -383,7 +381,7 @@ export const getClassicPoolSwapRecentTransaction = async (props: {
       return res.map((tx) => {
         return {
           ...tx,
-          timestamp: parsePoolTxTimeStamp(tx.timestamp),
+          timestamp: parsePoolTxTimeStamp(tx.timestamp)
         };
       });
     });
@@ -407,14 +405,14 @@ export const getDCLPoolSwapRecentTransaction = async (props: {
     config.indexerUrl + `/get-recent-transaction-dcl-swap?${paramString}`,
     {
       method: 'GET',
-      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      headers: { 'Content-type': 'application/json; charset=UTF-8' }
     }
   )
     .then((res) => res.json())
     .then((res: DCLPoolSwapTransaction[]) => {
       return res.map((t) => ({
         ...t,
-        timestamp: parsePoolTxTimeStamp(t.timestamp),
+        timestamp: parsePoolTxTimeStamp(t.timestamp)
       }));
     });
 };
@@ -441,14 +439,14 @@ export const getClassicPoolLiquidtyRecentTransaction = async (props: {
     config.indexerUrl + `/get-recent-transaction-liquidity?${paramString}`,
     {
       method: 'GET',
-      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      headers: { 'Content-type': 'application/json; charset=UTF-8' }
     }
   )
     .then((res) => res.json())
     .then((res: ClassicPoolLiquidtyRecentTransaction[]) => {
       return res.map((t) => ({
         ...t,
-        timestamp: parsePoolTxTimeStamp(t.timestamp),
+        timestamp: parsePoolTxTimeStamp(t.timestamp)
       }));
     });
 };
@@ -470,14 +468,14 @@ export const getDCLPoolLiquidtyRecentTransaction = async (props: {
     config.indexerUrl + `/get-recent-transaction-dcl-liquidity?${paramString}`,
     {
       method: 'GET',
-      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      headers: { 'Content-type': 'application/json; charset=UTF-8' }
     }
   )
     .then((res) => res.json())
     .then((res: DCLPoolLiquidtyRecentTransaction[]) => {
       return res.map((t) => ({
         ...t,
-        timestamp: parsePoolTxTimeStamp(t.timestamp),
+        timestamp: parsePoolTxTimeStamp(t.timestamp)
       }));
     });
 };
@@ -500,14 +498,14 @@ export const getLimitOrderRecentTransaction = async (props: {
     config.indexerUrl + `/get-recent-transaction-limit-order?${paramString}`,
     {
       method: 'GET',
-      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      headers: { 'Content-type': 'application/json; charset=UTF-8' }
     }
   )
     .then((res) => res.json())
     .then((res: LimitOrderRecentTransaction[]) => {
       return res.map((t) => ({
         ...t,
-        timestamp: parsePoolTxTimeStamp(t.timestamp),
+        timestamp: parsePoolTxTimeStamp(t.timestamp)
       }));
     });
 };
@@ -538,7 +536,7 @@ export const getDCLAccountFee = async (props: {
       config.indexerUrl + `/get-fee-by-account?${paramString}`,
       {
         method: 'GET',
-        headers: { 'Content-type': 'application/json; charset=UTF-8' },
+        headers: { 'Content-type': 'application/json; charset=UTF-8' }
       }
     ).then((res) => res.json());
   } catch (error) {
@@ -553,17 +551,17 @@ export interface ProposalHash {
 }
 
 export const getProposalHashes = async ({
-  proposal_ids,
-}: {
+                                          proposal_ids
+                                        }: {
   proposal_ids: number[];
 }) => {
   return fetch(
     config.indexerUrl +
-      '/get-proposal-hash-by-id?proposal_id=' +
-      proposal_ids.join('|'),
+    '/get-proposal-hash-by-id?proposal_id=' +
+    proposal_ids.join('|'),
     {
       method: 'GET',
-      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      headers: { 'Content-type': 'application/json; charset=UTF-8' }
     }
   )
     .then((res) => res.json())
@@ -574,15 +572,15 @@ export const getProposalHashes = async ({
 };
 
 export const getPoolsByIds = async ({
-  pool_ids,
-}: {
+                                      pool_ids
+                                    }: {
   pool_ids: string[];
 }): Promise<PoolRPCView[]> => {
   const ids = pool_ids.join('|');
   if (!ids) return [];
   return fetch(config.indexerUrl + '/list-pools-by-ids?ids=' + ids, {
     method: 'GET',
-    headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    headers: { 'Content-type': 'application/json; charset=UTF-8' }
   })
     .then((res) => res.json())
     .then((pools) => {
@@ -597,7 +595,7 @@ export const getPoolsByIds = async ({
 export const getTokenPriceList = async (): Promise<any> => {
   return await fetch(config.indexerUrl + '/list-token-price', {
     method: 'GET',
-    headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    headers: { 'Content-type': 'application/json; charset=UTF-8' }
   })
     .then((res) => res.json())
     .then((list) => {
@@ -608,7 +606,7 @@ export const getTokenPriceList = async (): Promise<any> => {
 export const getIndexerStatus = async (): Promise<any> => {
   return await fetch(config.indexerUrl + '/get-service-version', {
     method: 'GET',
-    headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    headers: { 'Content-type': 'application/json; charset=UTF-8' }
   }).then((res) => res.status !== 502);
 };
 
@@ -650,11 +648,11 @@ type Awaited<T> = T extends Promise<infer P> ? P : never;
 export const getLatestActions = async (): Promise<Array<ActionData>> => {
   return await fetch(
     config.indexerUrl +
-      '/latest-actions/' +
-      getCurrentWallet()?.wallet?.getAccountId(),
+    '/latest-actions/' +
+    getCurrentWallet()?.wallet?.getAccountId(),
     {
       method: 'GET',
-      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      headers: { 'Content-type': 'application/json; charset=UTF-8' }
     }
   )
     .then((res) => res.json())
@@ -672,7 +670,7 @@ export const getListHistoryTokenPriceByIds = async (
     config.indexerUrl + '/list-history-token-price-by-ids?ids=' + tokenIds,
     {
       method: 'GET',
-      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      headers: { 'Content-type': 'application/json; charset=UTF-8' }
     }
   )
     .then((res) => res.json())
@@ -689,7 +687,7 @@ export const getV3PoolVolumeById = async (pool_id: string): Promise<any[]> => {
     config.indexerUrl + '/get-dcl-pools-volume?pool_id=' + pool_id,
     {
       method: 'GET',
-      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      headers: { 'Content-type': 'application/json; charset=UTF-8' }
     }
   )
     .then((res) => res.json())
@@ -705,7 +703,7 @@ export const getV3poolTvlById = async (pool_id: string): Promise<any[]> => {
     config.indexerUrl + '/get-dcl-pools-tvl-list?pool_id=' + pool_id,
     {
       method: 'GET',
-      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      headers: { 'Content-type': 'application/json; charset=UTF-8' }
     }
   )
     .then((res) => res.json())
@@ -722,7 +720,7 @@ export const getV3Pool24VolumeById = async (pool_id: string): Promise<any> => {
     config.indexerUrl + '/get-24h-volume-by-id?pool_id=' + pool_id,
     {
       method: 'GET',
-      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      headers: { 'Content-type': 'application/json; charset=UTF-8' }
     }
   )
     .then((res) => res.json())
@@ -736,7 +734,7 @@ export const getV3Pool24VolumeById = async (pool_id: string): Promise<any> => {
 export const getAllV3Pool24Volume = async (): Promise<any[]> => {
   return await fetch(config.indexerUrl + '/get-24h-volume-list', {
     method: 'GET',
-    headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    headers: { 'Content-type': 'application/json; charset=UTF-8' }
   })
     .then((res) => res.json())
     .then((list) => {
@@ -749,7 +747,7 @@ export const getAllV3Pool24Volume = async (): Promise<any[]> => {
 
 export const getAllTvl = async () => {
   return await fetch(config.sodakiApiUrl + '/historical-tvl?period=1', {
-    method: 'GET',
+    method: 'GET'
   })
     .then((res) => res.json())
     .then((res) => {
@@ -759,7 +757,7 @@ export const getAllTvl = async () => {
 
 export const getAllVolume24h = async () => {
   return await fetch(config.sodakiApiUrl + '/24h-volume-variation', {
-    method: 'GET',
+    method: 'GET'
   })
     .then((res) => res.json())
     .then((res) => {
@@ -771,10 +769,10 @@ export const getAssets = async (dateType: 'M' | 'W' | 'H' | 'ALL' = 'H') => {
   const accountId = getCurrentWallet()?.wallet?.getAccountId();
   return await fetch(
     config.indexerUrl +
-      '/get-assets-by-account?' +
-      `account_id=${accountId}&dimension=${dateType}`,
+    '/get-assets-by-account?' +
+    `account_id=${accountId}&dimension=${dateType}`,
     {
-      method: 'GET',
+      method: 'GET'
     }
   )
     .then((res) => res.json())
@@ -788,10 +786,10 @@ export const getAssets = async (dateType: 'M' | 'W' | 'H' | 'ALL' = 'H') => {
 export const getLimitOrderLogsByAccount = async (): Promise<any[]> => {
   return await fetch(
     config.indexerUrl +
-      `/get-limit-order-log-by-account/${getCurrentWallet()?.wallet?.getAccountId()}`,
+    `/get-limit-order-log-by-account/${getCurrentWallet()?.wallet?.getAccountId()}`,
     {
       method: 'GET',
-      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      headers: { 'Content-type': 'application/json; charset=UTF-8' }
     }
   )
     .then((res) => res.json())
@@ -815,20 +813,20 @@ interface PriceList {
 }
 
 export const getTokenPairRate = async ({
-  token,
-  base_token,
-  dimension,
-}: {
+                                         token,
+                                         base_token,
+                                         dimension
+                                       }: {
   token: TokenMetadata;
   base_token: TokenMetadata;
   dimension: 'Y' | 'M' | 'W' | 'D' | 'All';
 }): Promise<TokenPairRate> => {
   return await fetch(
     config.indexerUrl +
-      `/token-price-report?token=${token.id}&base_token=${base_token.id}&dimension=${dimension}`,
+    `/token-price-report?token=${token.id}&base_token=${base_token.id}&dimension=${dimension}`,
     {
       method: 'GET',
-      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      headers: { 'Content-type': 'application/json; charset=UTF-8' }
     }
   )
     .then(async (res) => {
@@ -837,8 +835,8 @@ export const getTokenPairRate = async ({
         ...data,
         price_list: data.price_list.map((item: any) => ({
           price: Number(item.price),
-          date_time: item.date_time * 1000,
-        })),
+          date_time: item.date_time * 1000
+        }))
       };
     })
 
@@ -846,7 +844,7 @@ export const getTokenPairRate = async ({
       return {
         symbol: token.symbol,
         contract_address: token.id,
-        price_list: [],
+        price_list: []
       };
     });
 };
@@ -859,7 +857,7 @@ export const getDclPoolPoints = async (
 ) => {
   return await fetch(
     config.indexerUrl +
-      `/get-dcl-points?pool_id=${pool_id}&slot_number=${bin}&start_point=${start_point}&end_point=${end_point}`
+    `/get-dcl-points?pool_id=${pool_id}&slot_number=${bin}&start_point=${start_point}&end_point=${end_point}`
   )
     .then(async (res) => {
       const data = await res.json();
@@ -876,7 +874,7 @@ export const getDclUserPoints = async (
 ) => {
   return await fetch(
     config.indexerUrl +
-      `/get-dcl-points-by-account?pool_id=${pool_id}&slot_number=${bin}&account_id=${account_id}`
+    `/get-dcl-points-by-account?pool_id=${pool_id}&slot_number=${bin}&account_id=${account_id}`
   )
     .then(async (res) => {
       const data = await res.json();
