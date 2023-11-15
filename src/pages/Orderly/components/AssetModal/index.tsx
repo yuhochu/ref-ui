@@ -49,7 +49,7 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import { NearTip } from '../../../../pages/AccountPage';
 import { isClientMobie, useClientMobile } from '../../../../utils/device';
 import { TipIconAsset } from '../Common/Icons';
-import ReactTooltip from 'react-tooltip';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { usePerpData } from '../UserBoardPerp/state';
 import {
@@ -551,10 +551,9 @@ export function AssetModal(props: Modal.Props & { curHoldingOut }) {
 
               <div
                 data-class="reactTip"
-                data-for={'mobile_tip_asset_orderly'}
-                data-html={true}
+                data-tooltip-id={'mobile_tip_asset_orderly'}
                 data-place={'bottom'}
-                data-tip={`<div class=" rounded-md w-60 text-primaryOrderly  text-xs  text-left">
+                data-tooltip-html={`<div class=" rounded-md w-60 text-primaryOrderly  text-xs  text-left">
                 ${intl.formatMessage({
                   id: 'the_all_data_orderly_tip',
                   defaultMessage:
@@ -565,15 +564,7 @@ export function AssetModal(props: Modal.Props & { curHoldingOut }) {
               >
                 <TipIconAsset></TipIconAsset>
 
-                <ReactTooltip
-                  id={'mobile_tip_asset_orderly'}
-                  backgroundColor="#1D2932"
-                  place="bottom"
-                  border
-                  borderColor="#7e8a93"
-                  textColor="#C6D1DA"
-                  effect="solid"
-                />
+                <ReactTooltip id={'mobile_tip_asset_orderly'} place="bottom" />
               </div>
             </div>
 
