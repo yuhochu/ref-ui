@@ -9,7 +9,6 @@ import React, {
 import { matchPath } from 'react-router';
 import { Context } from 'src/components/wrapper';
 import getConfig from 'src/services/config';
-import ReactTooltip from 'react-tooltip';
 import {
   Logo,
   Near,
