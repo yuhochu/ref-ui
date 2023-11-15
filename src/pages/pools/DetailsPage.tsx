@@ -166,6 +166,7 @@ import { numberWithCommas } from '../Orderly/utiles';
 import { HiOutlineExternalLink, HiOutlineLink } from 'react-icons/hi';
 const STABLE_POOL_IDS = getConfig().STABLE_POOL_IDS;
 import { PoolRefreshModal } from './PoolRefreshModal';
+import CustomTooltip from 'src/components/customTooltip/customTooltip';
 
 interface ParamTypes {
   id: string;
@@ -2504,7 +2505,7 @@ export default function PoolDetailsPage() {
                       <WatchListStartFull />
                     )}
 
-                    <ReactTooltip id="fullstar-tip" />
+                    <CustomTooltip id="fullstar-tip" />
                   </div>
                 ) : (
                   <div
@@ -2524,7 +2525,7 @@ export default function PoolDetailsPage() {
                       <WatchListStartEmpty />
                     )}
 
-                    <ReactTooltip id="emptystar-tip" />
+                    <CustomTooltip id="emptystar-tip" />
                   </div>
                 )}
               </div>
@@ -2710,7 +2711,7 @@ export default function PoolDetailsPage() {
                       !isMobile() &&
                       seedFarms &&
                       BaseApr().rawApr > 0 && (
-                        <ReactTooltip
+                        <CustomTooltip
                           className="w-20"
                           id={'pool_list_pc_apr' + pool.id}
                           place="right"

@@ -56,6 +56,7 @@ import {
   CollatteralToken,
   CollatteralTokenAvailableCell,
 } from '../UserBoardPerp/components/HoverText';
+import CustomTooltip from 'src/components/customTooltip/customTooltip';
 
 function getTipAsset() {
   const intl = useIntl();
@@ -564,7 +565,7 @@ export function AssetModal(props: Modal.Props & { curHoldingOut }) {
               >
                 <TipIconAsset></TipIconAsset>
 
-                <ReactTooltip id={'mobile_tip_asset_orderly'} place="bottom" />
+                <CustomTooltip id={'mobile_tip_asset_orderly'} place="bottom" />
               </div>
             </div>
 

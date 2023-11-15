@@ -135,6 +135,7 @@ import {
   getPoolFeeApr,
   getPoolListFarmAprTip,
 } from './utils';
+import CustomTooltip from 'src/components/customTooltip/customTooltip';
 
 const HIDE_LOW_TVL = 'REF_FI_HIDE_LOW_TVL';
 
@@ -1693,7 +1694,7 @@ function PoolRow({
               </span>
             )}
           {supportFarm && farmApr > 0 && (
-            <ReactTooltip
+            <CustomTooltip
               className="w-20"
               id={'pool_list_pc_apr' + pool.id}
               place="right"
@@ -1881,7 +1882,7 @@ function PoolRowV2({
               <span className="text-xs text-gradientFrom">{getFarmApr()}</span>
             )}
             {relatedSeed && (
-              <ReactTooltip
+              <CustomTooltip
                 className="w-20"
                 id={'pool_list_v2_pc_apr' + pool.pool_id}
                 place="right"
@@ -2600,7 +2601,7 @@ function PcLiquidityPage({
                 </SolidButton>
 
                 {activeTab === 'v2' && (
-                  <ReactTooltip className="w-20" id="add_pool_tip" />
+                  <CustomTooltip className="w-20" id="add_pool_tip" />
                 )}
               </div>
             ) : null}

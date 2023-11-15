@@ -54,6 +54,7 @@ import { useOrderlyContext } from './orderly/OrderlyContext';
 import { Holding, MyOrder, OrderTrade } from './orderly/type';
 import { WalletContext } from '../../utils/wallets-integration';
 import { useWalletSelector } from '../../context/WalletSelectorContext';
+import CustomTooltip from 'src/components/customTooltip/customTooltip';
 export const PortfolioOrderlyData = createContext(null);
 const is_mobile = isMobile();
 
@@ -352,7 +353,7 @@ function PortfolioOrderly() {
                       `}
                     >
                       <QuestionMark />
-                      <ReactTooltip id="selectAllId" place="top" />
+                      <CustomTooltip id="selectAllId" place="top" />
                     </div>
                   </span>
                 </div>
