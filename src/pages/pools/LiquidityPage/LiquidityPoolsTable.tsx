@@ -28,7 +28,9 @@ const LiquidityPoolsTable = ({
   poolsData,
   poolsScrollRef,
 }) => {
-  let poolList = pools?.filter(poolFilterFunc)?.sort(poolReSortingFunc);
+  let poolList = pools
+    // ?.filter(poolFilterFunc)
+    ?.sort(poolReSortingFunc);
   const { handlePageChange, isFetching } = poolsData || {};
 
   return (

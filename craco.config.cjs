@@ -56,7 +56,18 @@ module.exports = {
       ],
       remove: ['CaseSensitivePathsPlugin', 'IgnorePlugin'],
     },
+    optimization: {
+      splitChunks: {
+        moduleIds: 'deterministic',
+        runtimeChunk: "single",
+        splitChunks: {
+          chunks: 'all',
+        },
+        minimize: false,
+      },
+    },
     configure: (webpackConfig) => {
+      console.log("webpackConfigwebpackConfig",webpackConfig)
       webpackConfig.devtool = 'source-map';
 
       webpackConfig.output = Object.assign(webpackConfig.output, {

@@ -4,12 +4,12 @@ import {
   percentLess,
   toPrecision,
   toNonDivisibleNumber,
-  toReadableNumber,
+  toReadableNumber
 } from '../utils/numbers';
 import {
   getStakedListByAccountId,
   get_seed,
-  list_seed_farms,
+  list_seed_farms, classificationOfCoins
 } from '../services/farm';
 import {
   DEFAULT_PAGE_LIMIT,
@@ -26,7 +26,7 @@ import {
   predictRemoveLiquidityByTokens,
   StablePool,
   getStablePool,
-  getPoolsFromCache,
+  getPoolsFromCache
 } from '../services/pool';
 import db, { PoolDb, WatchList } from '../store/RefDatabase';
 
@@ -58,19 +58,19 @@ import {
   getDCLAccountFee,
   getDCLTopBinFee,
   getTokenPriceList,
-  getIndexerStatus,
+  getIndexerStatus
 } from '../services/indexer';
 import { PoolRPCView } from '../services/api';
 import {
   ftGetTokenMetadata,
   TokenMetadata,
-  ftGetTokensMetadata,
+  ftGetTokensMetadata
 } from '../services/ft-contract';
 import { TokenBalancesView } from '../services/token';
 import {
   shareToAmount,
   getAddLiquidityShares,
-  getRemoveLiquidityByTokens,
+  getRemoveLiquidityByTokens
 } from '../services/stable-swap';
 import { STABLE_LP_TOKEN_DECIMALS } from 'src/components/stableswap/AddLiquidity';
 import BigNumber from 'bignumber.js';
@@ -78,7 +78,7 @@ import moment from 'moment';
 import {
   POOL_TOKEN_REFRESH_INTERVAL,
   STABLE_POOL_ID,
-  ALL_STABLE_POOL_IDS,
+  ALL_STABLE_POOL_IDS
 } from '../services/near';
 import { getCurrentWallet, WalletContext } from '../utils/wallets-integration';
 import getConfig from '../services/config';
@@ -86,11 +86,11 @@ import { useFarmStake } from './farm';
 import { ONLY_ZEROS, scientificNotationToString } from '../utils/numbers';
 import {
   getPoolsByTokensIndexer,
-  getAllPoolsIndexer,
+  getAllPoolsIndexer
 } from '../services/indexer';
 import {
   getStablePoolFromCache,
-  getRefPoolsByToken1ORToken2,
+  getRefPoolsByToken1ORToken2
 } from '../services/pool';
 import Big from 'big.js';
 import { getPoolFeeAprTitleRPCView } from '../pages/pools/MorePoolsPage';
@@ -100,11 +100,11 @@ import { isStablePool } from '../services/near';
 import { getStablePoolDecimal } from '../pages/stable/StableSwapEntry';
 import {
   get_default_config_for_chart,
-  get_custom_config_for_chart,
+  get_custom_config_for_chart
 } from '../components/d3Chart/config';
 import {
   IChartItemConfig,
-  IChartConfig,
+  IChartConfig
 } from '../components/d3Chart/interfaces';
 import { getPointByPrice, getPriceByPoint } from '../services/commonV3';
 import { formatPercentage } from '../components/d3Chart/utils';
@@ -120,7 +120,7 @@ export const usePoolUserTotalShare = (id: string | number) => {
 
   const farmStake = useFarmStake({
     poolId: Number(id),
-    stakeList: finalStakeList,
+    stakeList: finalStakeList
   });
 
   const userTotalShare = BigNumber.sum(shares, farmStake);
@@ -183,7 +183,7 @@ export const useBatchTotalShares = (
         return new Big(batchShares?.[index] || '0')
           .plus(new Big(batchFarmStake?.[index] || '0'))
           .toNumber();
-      }) || undefined,
+      }) || undefined
   };
 };
 
@@ -209,14 +209,15 @@ export const useStakeListByAccountId = () => {
         setFinalStakeList(finalStakeList);
         setStakeListDone(true);
       })
-      .catch(() => {});
+      .catch(() => {
+      });
   }, [isSignedIn]);
 
   return {
     stakeList,
     v2StakeList,
     finalStakeList,
-    stakeListDone,
+    stakeListDone
   };
 };
 
@@ -246,7 +247,8 @@ export const usePool = (id: number | string) => {
         setV2StakeList(v2StakedList);
         setFinalStakeList(finalStakeList);
       })
-      .catch(() => {});
+      .catch(() => {
+      });
   }, [id, isSignedIn]);
 
   return {
@@ -254,7 +256,7 @@ export const usePool = (id: number | string) => {
     shares,
     stakeList,
     v2StakeList,
-    finalStakeList,
+    finalStakeList
   };
 };
 
@@ -272,6 +274,7 @@ export const usePools = (props: {
   sortBy?: string;
   order?: string;
   hideLowTVL?: Boolean;
+  selectCoinClass?: string;
 }) => {
   const [page, setPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState<boolean>(true);
@@ -283,7 +286,7 @@ export const usePools = (props: {
   const [requestPoolList, setRequestPoolList] = useState<string[]>();
   const [total, setTotal] = useState<number>(0);
   const [rawData, setRawData] = useState<any>();
-  const { hideLowTVL } = props || {};
+  const { hideLowTVL, selectCoinClass } = props || {};
 
   useEffect(() => {
     setRequestPoolList(
@@ -307,29 +310,56 @@ export const usePools = (props: {
   }, [rawPools]);
 
   useEffect(() => {
-    if (hideLowTVL) {
-      setPools((d) => {
-        return _.filter(d, (pool) => pool.tvl > 1000);
-      });
-    } else {
-      if (hasMore === false) {
-        fetchPools({
-          page: 1,
-          size: PAGE_SIZE,
-          tokenName: props.tokenName,
-          sortBy: props.sortBy,
-          order: props.order,
-          isOverwrite: true,
-          disableLoading: false,
-        }).then();
-        setPage(1);
-      } else {
-        const sortedPools = sortLocalData(rawPools);
-        // @ts-ignore
-        setPools(sortedPools);
-      }
-    }
-  }, [hideLowTVL]);
+    // if (hideLowTVL) {
+    //   setPools((d) => {
+    //     return _.filter(d, (pool) => pool.tvl > 1000);
+    //   });
+    // } else {
+    //   if (hasMore === false) {
+    //     fetchPools({
+    //       page: 1,
+    //       size: PAGE_SIZE,
+    //       tokenName: props.tokenName,
+    //       sortBy: props.sortBy,
+    //       order: props.order,
+    //       isOverwrite: true,
+    //       disableLoading: false
+    //     }).then();
+    //     setPage(1);
+    //   } else {
+    //     const sortedPools = sortLocalData(rawPools);
+    //     // @ts-ignore
+    //     setPools(sortedPools);
+    //   }
+    // }
+    applyFrontendFilter({
+      pools,
+      rawPools,
+      hideLowTVL,
+      selectCoinClass
+    });
+  }, [hideLowTVL, selectCoinClass]);
+
+
+  // useEffect(() => {
+  //   if (selectCoinClass) {
+  //     if (selectCoinClass === 'all') {
+  //       const sortedPools = sortLocalData(rawPools);
+  //       // @ts-ignore
+  //       setPools(sortedPools);
+  //     } else {
+  //       setPools((d) => {
+  //         return d.filter(tk => {
+  //           const match = tk.token_symbols.some(d => {
+  //             return classificationOfCoins[selectCoinClass].includes(d);
+  //           });
+  //           return match;
+  //         });
+  //       });
+  //     }
+  //   }
+  // }, [selectCoinClass]);
+
 
   useEffect(() => {
     fetchPools({
@@ -339,7 +369,7 @@ export const usePools = (props: {
       sortBy: props.sortBy,
       order: props.order,
       isOverwrite: true,
-      disableLoading: false,
+      disableLoading: false
     }).then();
   }, [props.tokenName, props.sortBy, props.order]);
 
@@ -354,7 +384,7 @@ export const usePools = (props: {
       sortBy: props.sortBy,
       order: props.order,
       isOverwrite: false,
-      disableLoading: true,
+      disableLoading: true
     }).then();
     setPage((page) => page + 1);
   };
@@ -363,15 +393,34 @@ export const usePools = (props: {
     setPage(page);
   };
 
+  const applyFrontendFilter = ({ pools, rawPools, hideLowTVL, selectCoinClass }) => {
+    let poolsFiltered = sortLocalData(rawPools);
+    let hasMore = true;
+    if (hideLowTVL) {
+      poolsFiltered = _.filter(pools, (pool) => pool.tvl > 1000);
+      if (rawPools?.length > poolsFiltered.length) {
+        hasMore = false;
+      }
+    }
+    if (selectCoinClass && selectCoinClass !== 'all') {
+      poolsFiltered = pools.filter(tk => {
+        return tk.token_symbols.some(d => classificationOfCoins[selectCoinClass].includes(d));
+      });
+    }
+    // @ts-ignore
+    setPools(poolsFiltered);
+    setHasMore(hasMore);
+  };
+
   const fetchPools = async ({
-    page,
-    size,
-    tokenName,
-    sortBy,
-    order,
-    isOverwrite,
-    disableLoading,
-  }) => {
+                              page,
+                              size,
+                              tokenName,
+                              sortBy,
+                              order,
+                              isOverwrite,
+                              disableLoading
+                            }) => {
     try {
       !disableLoading && setIsFetching(true);
       let poolsData = [],
@@ -408,7 +457,7 @@ export const usePools = (props: {
       perPage: DEFAULT_PAGE_LIMIT,
       tokenName: trim(props.tokenName),
       column: props.sortBy,
-      order: props.order,
+      order: props.order
     };
     return _order(args, _search(args, arr));
   };
@@ -425,16 +474,16 @@ export const usePools = (props: {
       page: rawData?.page,
       pages: rawData?.pages,
       size: rawData?.size,
-      total: rawData?.total,
+      total: rawData?.total
     },
-    handlePageChange,
+    handlePageChange
   };
 };
 
 export const useMorePoolIds = ({
-  topPool,
-  inView,
-}: {
+                                 topPool,
+                                 inView
+                               }: {
   topPool: Pool;
   inView: boolean;
 }) => {
@@ -446,7 +495,7 @@ export const useMorePoolIds = ({
     if (!inView) return;
     getCachedPoolsByTokenId({
       token1Id,
-      token2Id,
+      token2Id
     }).then(setIds);
   }, [topPool?.id, inView]);
   return ids;
@@ -482,7 +531,7 @@ export const usePoolsMorePoolIds = () => {
         (acc: any, cur: any, i: number) => {
           return {
             ...acc,
-            [res[i].id.toString()]: cur,
+            [res[i].id.toString()]: cur
           };
         },
         {}
@@ -496,10 +545,10 @@ export const usePoolsMorePoolIds = () => {
 };
 
 export const useMorePools = ({
-  tokenIds,
-  order,
-  sortBy,
-}: {
+                               tokenIds,
+                               order,
+                               sortBy
+                             }: {
   tokenIds: string[];
   order: boolean | 'desc' | 'asc';
   sortBy: string;
@@ -511,7 +560,7 @@ export const useMorePools = ({
   useEffect(() => {
     getPoolsByTokensIndexer({
       token0: tokenIds[0],
-      token1: tokenIds[1],
+      token1: tokenIds[1]
     }).then((res) => {
       // const orderedPools = orderBy(res, [sortBy], [order]);
 
@@ -525,11 +574,11 @@ export const useMorePools = ({
             (acc: any, cur: any, i: number) => {
               return {
                 ...acc,
-                [cur]: p.amounts[i],
+                [cur]: p.amounts[i]
               };
             },
             {}
-          ),
+          )
         };
       });
 
@@ -551,7 +600,7 @@ export const useMorePools = ({
           apr:
             getPoolFeeAprTitleRPCView(res[i], morePools[i]) +
             (farmAprById?.[p.id] || 0) * 100,
-          farmApr: farmAprById?.[p.id] || 0,
+          farmApr: farmAprById?.[p.id] || 0
         };
       });
 
@@ -560,33 +609,29 @@ export const useMorePools = ({
   }, [
     (morePools || []).map((p) => p?.id).join('-'),
     loadingSeedsDone,
-    farmAprById,
+    farmAprById
   ]);
 
   return !morePools
     ? null
     : orderBy(
-        morePools?.map((p) => ({
-          ...p,
-          tvl: Number(p.tvl),
-        })),
-        [sortBy],
-        [order]
-      );
+      morePools?.map((p) => ({
+        ...p,
+        tvl: Number(p.tvl)
+      })),
+      [sortBy],
+      [order]
+    );
 };
 
 export const usePoolsFarmCount = ({
-  morePoolIds,
-}: {
+                                    morePoolIds
+                                  }: {
   morePoolIds: string[];
 }) => {
-  const [poolsFarmCountv1, setPoolsFarmCountv1] = useState<
-    Record<string, number>
-  >({});
+  const [poolsFarmCountv1, setPoolsFarmCountv1] = useState<Record<string, number>>({});
 
-  const [poolsFarmCountv2, setPoolsFarmCountv2] = useState<
-    Record<string, number>
-  >({});
+  const [poolsFarmCountv2, setPoolsFarmCountv2] = useState<Record<string, number>>({});
 
   const getFarms = async () => {
     return (await db.queryFarms()).filter((farm) => farm.status !== 'Ended');
@@ -611,7 +656,7 @@ export const usePoolsFarmCount = ({
       const parsedCounts = counts.reduce((acc, cur, i) => {
         return {
           ...acc,
-          [morePoolIds[i]]: cur,
+          [morePoolIds[i]]: cur
         };
       }, {});
 
@@ -632,7 +677,7 @@ export const usePoolsFarmCount = ({
       const parsedCounts = counts.reduce((acc, cur, i) => {
         return {
           ...acc,
-          [morePoolIds[i]]: cur,
+          [morePoolIds[i]]: cur
         };
       }, {});
 
@@ -646,7 +691,7 @@ export const usePoolsFarmCount = ({
       [cur]:
         poolsFarmCountv2[cur] > 0
           ? poolsFarmCountv2[cur]
-          : poolsFarmCountv1[cur],
+          : poolsFarmCountv1[cur]
     };
   }, {});
 
@@ -715,7 +760,7 @@ export const useWatchPools = () => {
             resPools.map(async (p) => {
               return {
                 ...p,
-                metas: await ftGetTokensMetadata(p.tokenIds),
+                metas: await ftGetTokensMetadata(p.tokenIds)
               };
             })
           );
@@ -801,10 +846,10 @@ export const useAllPools = () => {
 };
 
 export const useRemoveLiquidity = ({
-  pool,
-  shares,
-  slippageTolerance,
-}: {
+                                     pool,
+                                     shares,
+                                     slippageTolerance
+                                   }: {
   pool: Pool;
   shares: string;
   slippageTolerance: number;
@@ -818,7 +863,7 @@ export const useRemoveLiquidity = ({
         calculateFairShare({
           shareOf: totalSupply,
           contribution: shares,
-          totalContribution: pool.shareSupply,
+          totalContribution: pool.shareSupply
         })
       ),
       0
@@ -830,13 +875,13 @@ export const useRemoveLiquidity = ({
     return removeLiquidityFromPool({
       id: pool.id,
       shares,
-      minimumAmounts,
+      minimumAmounts
     });
   };
 
   return {
     removeLiquidity,
-    minimumAmounts,
+    minimumAmounts
   };
 };
 
@@ -864,7 +909,7 @@ export const useMonthVolume = (pool_id: string) => {
         .map((v, i) => {
           return {
             ...v,
-            volume_dollar: Number(v.volume_dollar),
+            volume_dollar: Number(v.volume_dollar)
           };
         })
         .reverse();
@@ -916,7 +961,7 @@ export const useMonthTVL = (pool_id: string) => {
             fiat_tvl: Number(v?.fiat_tvl),
             total_tvl: Number(v?.fiat_tvl) + Number(v?.asset_tvl),
             scaled_tvl:
-              Number(v?.fiat_tvl) + Number(v?.asset_tvl) - minValue * 0.99,
+              Number(v?.fiat_tvl) + Number(v?.asset_tvl) - minValue * 0.99
           };
         })
         .reverse();
@@ -1006,7 +1051,7 @@ export const useSeedFarms = (pool_id: string | number) => {
               return {
                 ...farm,
                 token_meta_data,
-                yearReward,
+                yearReward
               };
             })
         );
@@ -1074,7 +1119,7 @@ export const useSeedFarmsByPools = (pools: Pool[]) => {
                   return {
                     ...farm,
                     token_meta_data,
-                    yearReward,
+                    yearReward
                   };
                 })
             );
@@ -1091,9 +1136,9 @@ export const useSeedFarmsByPools = (pools: Pool[]) => {
       })
       .then(
         async ({
-          seedFarmsById,
-          cacheSeeds,
-        }: {
+                 seedFarmsById,
+                 cacheSeeds
+               }: {
           seedFarmsById: Record<string, any>;
           cacheSeeds: Record<string, any>;
         }) => {
@@ -1134,8 +1179,8 @@ export const useSeedFarmsByPools = (pools: Pool[]) => {
                         seedDetail.total_seed_power
                       )
                     ) *
-                      (pool.tvl || 0)) /
-                    poolShares;
+                    (pool.tvl || 0)) /
+                  poolShares;
 
               const baseAprAll = !seedTvl ? 0 : totalReward / seedTvl;
 
@@ -1148,7 +1193,7 @@ export const useSeedFarmsByPools = (pools: Pool[]) => {
           const returnAPRs = ARPs.reduce((acc, cur, i) => {
             return {
               ...acc,
-              [Object.keys(seedFarmsById)[i].split('@')[1]]: cur,
+              [Object.keys(seedFarmsById)[i].split('@')[1]]: cur
             };
           }, {});
 
@@ -1165,15 +1210,15 @@ export const useSeedFarmsByPools = (pools: Pool[]) => {
 
   return {
     farmAprById,
-    loadingSeedsDone,
+    loadingSeedsDone
   };
 };
 
 export const usePredictShares = ({
-  poolId,
-  tokenAmounts,
-  stablePool,
-}: {
+                                   poolId,
+                                   tokenAmounts,
+                                   stablePool
+                                 }: {
   poolId: number;
   tokenAmounts: string[];
   stablePool: StablePool;
@@ -1202,11 +1247,11 @@ export const usePredictShares = ({
 };
 
 export const usePredictRemoveShares = ({
-  amounts,
-  setError,
-  shares,
-  stablePool,
-}: {
+                                         amounts,
+                                         setError,
+                                         shares,
+                                         stablePool
+                                       }: {
   amounts: string[];
   setError: (e: Error) => void;
   shares: string;
@@ -1253,17 +1298,17 @@ export const usePredictRemoveShares = ({
 
   return {
     predictedRemoveShares,
-    canSubmitByToken,
+    canSubmitByToken
   };
 };
 
 export const useStablePool = ({
-  loadingTrigger,
-  setLoadingTrigger,
-  loadingPause,
-  setLoadingPause,
-  poolId,
-}: {
+                                loadingTrigger,
+                                setLoadingTrigger,
+                                loadingPause,
+                                setLoadingPause,
+                                poolId
+                              }: {
   loadingTrigger: boolean;
   setLoadingTrigger: (mode: boolean) => void;
   loadingPause: boolean;
@@ -1337,7 +1382,7 @@ export const useYourliquidity = (poolId: number) => {
     farmStakeV1,
     farmStakeV2,
     userTotalShare,
-    userTotalShareToString,
+    userTotalShareToString
   };
 };
 
@@ -1443,25 +1488,23 @@ export const useV3VolumesPools = () => {
 };
 
 export const useClassicPoolTransaction = ({
-  pool_id,
-}: {
+                                            pool_id
+                                          }: {
   pool_id: string | number;
 }) => {
   const [swapRecent, setSwapRecent] = useState<ClassicPoolSwapTransaction[]>(
     []
   );
 
-  const [lqRecent, setLqRecent] = useState<
-    ClassicPoolLiquidtyRecentTransaction[]
-  >([]);
+  const [lqRecent, setLqRecent] = useState<ClassicPoolLiquidtyRecentTransaction[]>([]);
 
   useEffect(() => {
     getClassicPoolSwapRecentTransaction({
-      pool_id,
+      pool_id
     }).then(setSwapRecent);
 
     getClassicPoolLiquidtyRecentTransaction({
-      pool_id,
+      pool_id
     }).then(setLqRecent);
   }, []);
 
@@ -1469,8 +1512,8 @@ export const useClassicPoolTransaction = ({
 };
 
 export const useDCLPoolTransaction = ({
-  pool_id,
-}: {
+                                        pool_id
+                                      }: {
   pool_id: string | number;
 }) => {
   const [swapRecent, setSwapRecent] = useState<DCLPoolSwapTransaction[]>([]);
@@ -1479,35 +1522,33 @@ export const useDCLPoolTransaction = ({
     []
   );
 
-  const [limitOrderRecent, setLimitOrderRecent] = useState<
-    LimitOrderRecentTransaction[]
-  >([]);
+  const [limitOrderRecent, setLimitOrderRecent] = useState<LimitOrderRecentTransaction[]>([]);
 
   useEffect(() => {
     getDCLPoolSwapRecentTransaction({
-      pool_id,
+      pool_id
     }).then(setSwapRecent);
 
     getDCLPoolLiquidtyRecentTransaction({
-      pool_id,
+      pool_id
     }).then(setLqRecent);
 
     getLimitOrderRecentTransaction({
-      pool_id,
+      pool_id
     }).then(setLimitOrderRecent);
   }, []);
 
   return {
     swapTransactions: swapRecent,
     liquidityTransactions: lqRecent,
-    limitOrderTransactions: limitOrderRecent,
+    limitOrderTransactions: limitOrderRecent
   };
 };
 
 export const useDCLTopBinFee = ({
-  pool,
-  way,
-}: {
+                                  pool,
+                                  way
+                                }: {
   pool: PoolInfo;
   way?: 'value' | 'display';
 }) => {
@@ -1519,7 +1560,7 @@ export const useDCLTopBinFee = ({
       pool_id: pool.pool_id,
       bin,
       start_point,
-      end_point,
+      end_point
     }).then((res) => {
       if (!res || ONLY_ZEROS.test(res.total_liquidity)) return;
       const apr = new Big(res.total_fee)
@@ -1602,6 +1643,6 @@ export const useIndexerStatus = (dep?: any) => {
   }, []);
 
   return {
-    fail: typeof indexerStatus === 'boolean' && !indexerStatus,
+    fail: typeof indexerStatus === 'boolean' && !indexerStatus
   };
 };
